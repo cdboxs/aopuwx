@@ -1,0 +1,57 @@
+/**index.wxss**/
+#banner image{
+  width:100%;
+}
+.indexMenu {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.indexMenu .icons {
+  width:33.33%;
+  margin:30rpx 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.indexMenu .icons view {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom:5rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.indexMenu .icons text{
+  width:100%;
+  color:#444;
+  font-size: 30rpx;
+  text-align: center;
+}
+.indexMenu .icons:nth-of-type(1) view {
+  background: #4a90e2;
+}
+.indexMenu .icons:nth-of-type(2) view {
+  background: #c5bf11;
+}
+.indexMenu .icons:nth-of-type(3) view {
+  background: #0ba93f;
+}
+.indexMenu .icons:nth-of-type(4) view {
+  background: #e6aa08;
+}
+.indexMenu .icons:nth-of-type(5) view {
+  background: #c7395a;
+}
+.indexMenu .icons:nth-of-type(6) view {
+  background: #22a0a8;
+}
+.indexMap{
+  width:100%;
+}

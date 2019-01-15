@@ -1,0 +1,41 @@
+/* pages/history/index.wxss */
+
+
+.hlist{
+  width: 95%;
+  color:#7f7f7f;
+  padding: 10rpx;
+  margin: 40rpx auto;
+  border-left: 10rpx solid #ddd;
+  box-sizing: border-box;
+  box-shadow: 0 2px 2px 1px #eee;
+}
+.hlist view{
+  font-size: 30rpx;
+}
+.hlist view:first-child{
+  padding:10rpx 0;
+  border-bottom:1rpx solid #ddd;
+}
+.hlist view:last-child{
+  display: flex;
+  flex-flow: row;
+  padding:10rpx 0;
+  justify-content: flex-start;
+}
+
+.hlist view:last-child text:first-child{
+  display: inline-block;
+  width:25%;
+}
+.hlist view:last-child text:last-child{
+  display: inline-block;
+  width:80%;
+}
+
+
+
+
+
+
+

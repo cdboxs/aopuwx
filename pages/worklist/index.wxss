@@ -1,0 +1,94 @@
+/* pages/worklist/index.wxss */
+pages{
+  height: 100%;
+  overflow-y: hidden;
+}
+.workNav {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid #ddd;
+}
+::-webkit-scrollbar {
+ width: 0;
+ height: 0;
+ color: transparent;
+}
+.workNav view {
+  width:20%;
+  height: 100%;
+  padding:30rpx 0;
+  color: #393939;
+  font-size: 33rpx;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.workNav view.active {
+  color: #2cabe2;
+  border-bottom: 2px solid #2cabe2;
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 40rpx;
+  color: #7f7f7f;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.worklist {
+  width: 95%;
+  color:#7f7f7f;
+  padding: 20rpx;
+  margin: 40rpx auto;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  box-shadow: 0 2px 2px 1px #eee;
+
+}
+
+.workhead {
+  padding-bottom:20rpx;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.workhead .time {
+  font-size: 30rpx;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workhead .time view {
+  margin-right: 20rpx;
+}
+.workhead .status {
+  padding:10rpx 25rpx;
+  font-size: 33rpx;
+  border-radius: 50rpx;
+  background:#eee;
+}
+.workbody{
+  margin:20rpx 0 0 0;
+  font-size: 33rpx;
+}
+.workbody view:nth-of-type(1){
+  margin-bottom:20rpx;
+}
+.workbody view:nth-of-type(2){
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: space-between;
+}
+.workbody view:nth-of-type(2) text{
+  color:#39a9e9;
+}

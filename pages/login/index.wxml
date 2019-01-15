@@ -1,0 +1,21 @@
+<!--pages/login/index.wxml-->
+<view class='login'>
+  <view class='login_logo'>
+    <image src='../img/logo.png'></image>
+    <text>IMS智能运维系统</text>
+  </view>
+
+  <form class='login_form' bindsubmit='login'>
+    <view>
+      <icon class='iconfont icon-icon--'></icon>
+      <input type='number' name="phone" placeholder='请输入手机号'></input>
+    </view>
+    <view>
+      <icon class='iconfont icon-mima'></icon>
+      <input type='number'password="true" name="pwd" placeholder='请输入密码'></input>
+    </view>
+    <text class='loginTip'>如忘记密码请联系管理员</text>
+    <button form-type='submit'>登录</button>
+  </form>
+
+</view>

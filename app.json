@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/index/index",
+    "pages/addController/index",
+    "pages/c_map/index",
+    "pages/worklist/index",
+    "pages/workinfo/index",
+    "pages/signMap/index",
+    "pages/myManage/index",
+    "pages/myManageInfo/index",
+    "pages/member/index",
+    "pages/member_modular/setPwd/index",
+    "pages/member_modular/setMyInfo/index",
+    "pages/equipment/index",
+    "pages/history/index",
+    "pages/spotList/index",
+    "pages/spotOver/index",
+    "pages/spotCheck/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2cabe2",
+    "navigationBarTitleText": "奥普泰光通信有限公司",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "pages/img/index.png",
+        "selectedIconPath": "pages/img/index.png"
+      },
+      {
+        "pagePath": "pages/worklist/index",
+        "text": "我的工单",
+        "iconPath": "pages/img/gd.png",
+        "selectedIconPath": "pages/img/gd.png"
+      },
+      {
+        "pagePath": "pages/member/index",
+        "text": "个人中心",
+        "iconPath": "pages/img/member.png",
+        "selectedIconPath": "pages/img/member.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

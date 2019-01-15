@@ -1,0 +1,52 @@
+/* pages/equipment/index.wxss */
+
+.equipment {
+  width: 100%;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.controllerName {
+  width: 95%;
+  color: #2cabe3;
+  font-size: 33rpx;
+  padding: 0 15rpx;
+  margin:30rpx 30rpx 0rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-left: 10rpx solid #2cabe3;
+}
+
+.controllerName .green {
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: green;
+}
+.controllerName .black {
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: green;
+}
+
+.equipment view{
+  color:#8a8a8a;
+  font-size: 30rpx;
+  margin:0 0 40rpx 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.equipment view text:nth-of-type(1){
+  width: 25%;
+}
+.equipment view text:nth-of-type(2){
+  width:74%;
+}

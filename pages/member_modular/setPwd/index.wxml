@@ -1,0 +1,6 @@
+<!--pages/member_modular/setPwd/index.wxml-->
+<form bindsubmit='setPwd' class='setPwd'>
+  <input type='number'password="true" name="oldPwd" placeholder='请输入原始密码'></input>
+  <input type='number'password="true" name="newPwd" placeholder='请输入新密码'></input>
+  <button  form-type='submit'>修改</button>
+</form>

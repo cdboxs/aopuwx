@@ -1,0 +1,166 @@
+<!--pages/worklist/index.wxml-->
+<scroll-view class='workNav' scroll-x scroll-with-animation="true" scroll-left="{{scrollLeft}}px">
+  <view class="{{workNavId==7?'active':''}}" data-workNavId="7" bindtap='workNav'>全部</view>
+  <!-- <view class="{{workNavId==0?'active':''}}" data-workNavId="0" bindtap='workNav'>待派单</view> -->
+  <view class="{{workNavId==1?'active':''}}" data-workNavId="1" bindtap='workNav'>待维修</view>
+  <view class="{{workNavId==2?'active':''}}" data-workNavId="2" bindtap='workNav'>维修中</view>
+  <view class="{{workNavId==3?'active':''}}" data-workNavId="3" bindtap='workNav'>待评价</view>
+  <!-- <view class="{{workNavId==4?'active':''}}" data-workNavId="4" bindtap='workNav'>已撤单</view> -->
+  <view class="{{workNavId==5?'active':''}}" data-workNavId="5" bindtap='workNav'>已完成</view>
+  <view class="{{workNavId==6?'active':''}}" data-workNavId="6" bindtap='workNav'>未完成</view>
+</scroll-view>
+<view wx:if="{{workNavId==7}}">
+  <scroll-view style='height:{{scrollHeight}}px;' scroll-y data-id='7' bindscrolltolower="getWorkMoreData">
+    <view class='worklist' wx:for="{{getWorkAllData}}" wx:key="key">
+        <view class='workhead'>
+          <view class='time'><view class='iconfont icon-shijian'></view>{{item.faultTime}}</view>
+         <text wx:if="{{item.status==0}}" class='status red'>待派单</text>
+        <text wx:elif="{{item.status==1}}" class='status red'>待维修</text>
+        <text wx:elif="{{item.status==2}}" class='status qyellow'>维修中</text>
+        <text wx:elif="{{item.status==3}}" class='status qpink'>待评价</text>
+        <text wx:elif="{{item.status==4}}" class='status red'>已撤单</text>
+        <text wx:elif="{{item.status==5}}" class='status qgreen'>已完成</text>
+        <text wx:elif="{{item.status==6}}" class='status red'>未完成</text>
+        </view>
+        <view class='workbody'>
+          <view>地点：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}}... 
+          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+        </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view wx:if="{{workNavId==1}}">
+<scroll-view style='height:{{scrollHeight}}px;' scroll-y data-id='1' bindscrolltolower="getWorkMoreData">
+  <view class='worklist' wx:for="{{getWorkAllData}}" wx:key="key">
+        <view class='workhead'>
+          <view class='time'><view class='iconfont icon-shijian'></view>{{item.faultTime}}</view>
+          <view wx:if="{{item.status==0}}" class='status qpink'>待派单</view>
+          <view wx:elif="{{item.status==1}}" class='status qpink'>待维修</view>
+          <view wx:elif="{{item.status==2}}" class='status qpink'>维修中</view>
+          <view wx:elif="{{item.status==3}}" class='status qpink'>待评价</view>
+          <view wx:elif="{{item.status==4}}" class='status qpink'>已撤单</view>
+          <view wx:elif="{{item.status==5}}" class='status qpink'>已完成</view>
+          <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
+        </view>
+        <view class='workbody'>
+          <view>地点：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}} 
+          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+        </view>
+    </view>
+</scroll-view>
+</view>
+<view wx:if="{{workNavId==2}}">
+<scroll-view style='height:{{scrollHeight}}px;' scroll-y data-id='2' bindscrolltolower="getWorkMoreData">
+  <view class='worklist' wx:for="{{getWorkAllData}}" wx:key="key">
+        <view class='workhead'>
+          <view class='time'><view class='iconfont icon-shijian'></view>{{item.faultTime}}</view>
+          <view wx:if="{{item.status==0}}" class='status qpink'>待派单</view>
+          <view wx:elif="{{item.status==1}}" class='status qpink'>待维修</view>
+          <view wx:elif="{{item.status==2}}" class='status qpink'>维修中</view>
+          <view wx:elif="{{item.status==3}}" class='status qpink'>待评价</view>
+          <view wx:elif="{{item.status==4}}" class='status qpink'>已撤单</view>
+          <view wx:elif="{{item.status==5}}" class='status qpink'>已完成</view>
+          <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
+        </view>
+        <view class='workbody'>
+          <view>地点：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}} 
+          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+        </view>
+    </view>
+</scroll-view>
+</view>
+<view wx:if="{{workNavId==3}}">
+<scroll-view style='height:{{scrollHeight}}px;' scroll-y data-id='3' bindscrolltolower="getWorkMoreData">
+  <view class='worklist' wx:for="{{getWorkAllData}}" wx:key="key">
+        <view class='workhead'>
+          <view class='time'><view class='iconfont icon-shijian'></view>{{item.faultTime}}</view>
+          <view wx:if="{{item.status==0}}" class='status qpink'>待派单</view>
+          <view wx:elif="{{item.status==1}}" class='status qpink'>待维修</view>
+          <view wx:elif="{{item.status==2}}" class='status qpink'>维修中</view>
+          <view wx:elif="{{item.status==3}}" class='status qpink'>待评价</view>
+          <view wx:elif="{{item.status==4}}" class='status qpink'>已撤单</view>
+          <view wx:elif="{{item.status==5}}" class='status qpink'>已完成</view>
+          <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
+        </view>
+        <view class='workbody'>
+          <view>地点：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}} 
+          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+        </view>
+    </view>
+</scroll-view>
+</view>
+
+<view wx:if="{{workNavId==5}}">
+<scroll-view style='height:{{scrollHeight}}px;' scroll-y data-id='5' bindscrolltolower="getWorkMoreData">
+  <view class='worklist' wx:for="{{getWorkAllData}}" wx:key="key">
+        <view class='workhead'>
+          <view class='time'><view class='iconfont icon-shijian'></view>{{item.faultTime}}</view>
+          <view wx:if="{{item.status==0}}" class='status qpink'>待派单</view>
+          <view wx:elif="{{item.status==1}}" class='status qpink'>待维修</view>
+          <view wx:elif="{{item.status==2}}" class='status qpink'>维修中</view>
+          <view wx:elif="{{item.status==3}}" class='status qpink'>待评价</view>
+          <view wx:elif="{{item.status==4}}" class='status qpink'>已撤单</view>
+          <view wx:elif="{{item.status==5}}" class='status qpink'>已完成</view>
+          <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
+        </view>
+        <view class='workbody'>
+          <view>地点：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}} 
+          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+        </view>
+    </view>
+</scroll-view>
+</view>
+<view wx:if="{{workNavId==6}}">
+<scroll-view style='height:{{scrollHeight}}px;' scroll-y data-id='6' bindscrolltolower="getWorkMoreData">
+  <view class='worklist' wx:for="{{getWorkAllData}}" wx:key="key">
+        <view class='workhead'>
+          <view class='time'><view class='iconfont icon-shijian'></view>{{item.faultTime}}</view>
+          <view wx:if="{{item.status==0}}" class='status qpink'>待派单</view>
+          <view wx:elif="{{item.status==1}}" class='status qpink'>待维修</view>
+          <view wx:elif="{{item.status==2}}" class='status qpink'>维修中</view>
+          <view wx:elif="{{item.status==3}}" class='status qpink'>待评价</view>
+          <view wx:elif="{{item.status==4}}" class='status qpink'>已撤单</view>
+          <view wx:elif="{{item.status==5}}" class='status qpink'>已完成</view>
+          <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
+        </view>
+        <view class='workbody'>
+          <view>地点：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}}... 
+          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+        </view>
+    </view>
+</scroll-view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

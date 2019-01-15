@@ -1,0 +1,51 @@
+<!--pages/equipment/index.wxml-->
+<view class='controllerName'>{{e.equipment.name}}
+  <text class="{{e.equipment.workStatus==1 ? 'green' : 'black'}}"></text>
+</view>
+<view class='equipment'>
+
+  <view>
+    <text>IP地址：</text>
+    <text>{{e.equipment.ip}}</text>
+  </view>
+  <view>
+    <text>网络状态：</text>
+    <text wx:if="{{e.equipmentMonit.networkStatus==null}}">网络异常</text>
+    <text wx:if="{{e.equipmentMonit.networkStatus==1}}">正常</text>
+    <text wx:if="{{e.equipmentMonit.networkStatus==0}}">断开</text>
+  </view>
+  <view>
+    <text>工作状态：</text>
+    <text wx:if="{{e.equipment.workStatus==null}}">异常</text>
+    <text wx:if="{{e.equipment.workStatus==1}}">正常</text>
+    <text wx:if="{{e.equipment.workStatus==0}}">断开</text>
+  </view>
+  <view>
+    <text>电流：</text>
+    <text>{{e.equipment.electricOwn}}</text>
+  </view>
+  <view>
+    <text>丢包率：</text>
+    <text>{{e.equipmentMonit.packetLossRate}}%</text>
+  </view>
+  <view>
+    <text>品牌名称：</text>
+    <text>{{e.equipment.brand}}</text>
+  </view>
+  <view>
+    <text>设备型号：</text>
+    <text>{{e.equipment.model}}</text>
+  </view>
+  <view>
+    <text>所属单位：</text>
+    <text>{{e.resDepartName}}</text>
+  </view>
+  <view>
+    <text>维护单位：</text>
+    <text>{{e.maintDepartName}}</text>
+  </view>
+  <view>
+    <text>维护人员：</text>
+    <text>{{e.maintUserName}}</text>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+<!--pages/member/index.wxml-->
+<view class='mTop'>
+  <view>
+    <image src='../img/logo.png'></image>
+  </view>
+  <view>
+    {{userInfo.userName}}
+    <view bindtap='loginOut'>退出</view>
+  </view>
+  
+</view>
+
+<view class='menu_list'>
+  <view class='menu' bindtap='linkSetPwd'>
+    <view>
+      <icon class='icon iconfont icon-dianwei'></icon>
+      <text>修改密码</text>
+    </view>
+    <icon class='icon iconfont icon-jiantou12'></icon>
+  </view>
+  <view class='menu' bindtap='linkMyInfo'>
+    <view>
+      <icon class='icon iconfont icon-dianwei'></icon>
+      <text>我的信息</text>
+    </view>
+    <icon class='icon iconfont icon-jiantou12'></icon>
+  </view>
+</view>

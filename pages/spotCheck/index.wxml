@@ -1,0 +1,14 @@
+<!--pages/workMap/index.wxml-->
+<map class='signMap' style='height:{{signMapH-64}}px;' scale="15" longitude="{{longitude}}" latitude="{{latitude}}" markers='{{markers}}'>
+  <cover-view class='mapTip'>
+    <cover-view>系统检测到您在</cover-view>
+    <cover-view>{{myAddress.address}}</cover-view>
+    <cover-view>附近</cover-view>
+  </cover-view>
+  <cover-view class='signBtn' bindtap='checkCode' style='left:{{signBtnLeft/2}}px'>
+      <cover-view>巡检扫码</cover-view>
+      <cover-view>|</cover-view>
+      <cover-view>{{nowTime}}</cover-view>
+  </cover-view>
+  <cover-image src='../img/myPosition.png' class='myPosition' style='right:{{signBtnLeft/20}}px' bindtap='myLocation'></cover-image>
+</map>

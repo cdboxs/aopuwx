@@ -1,0 +1,84 @@
+/* pages/member/index.wxss */
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:64rpx;
+  color:#ddd;
+  font-style:normal;
+ -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.mTop{
+  width:100%;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  padding:50rpx;
+}
+.mTop view{
+  margin:0 50rpx 0 0;
+}
+.mTop view:last-child view{
+  color:#fff;
+  font-size: 30rpx;
+  padding:5rpx 20rpx;
+  margin-top:30rpx;
+  background:#1296db;
+  border-radius: 8rpx;
+}
+.mTop image{
+  width:166rpx;
+  height: 146rpx;
+  border-radius: 20rpx;
+  border:1rpx solid #eee;
+}
+.menu_list{
+  width:100%;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding:0 50rpx;
+  box-sizing: border-box;
+}
+.menu_list view.menu{
+  width:100%;
+  height: 66rpx;
+  padding:20rpx 0;
+  font-size: 30rpx;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:space-between;
+  align-items: center;
+  border-bottom:1rpx solid #ddd;
+}
+.menu_list view.menu view{
+  height: 60rpx;
+   display: flex;
+  flex-flow: row wrap;
+  justify-content:space-between;
+  align-items: center;
+}
+.menu_list view.menu view icon{
+font-size: 50rpx;
+ vertical-align: middle;
+display:  table;
+}
+.menu_list view.menu view text{
+  color:#888;
+  margin-left:20rpx;
+}
+
+
+
+
+
+
+
+
+
+
+

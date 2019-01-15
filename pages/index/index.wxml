@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<swiper id='banner' indicator-dots indicator-color="#2aabe2" indicator-active-color="#fff">
+  <swiper-item><image src='../img/banner.jpg'></image></swiper-item>
+  <swiper-item><image src='../img/banner.jpg'></image></swiper-item>
+  <swiper-item><image src='../img/banner.jpg'></image></swiper-item>
+</swiper>
+<view class='indexMenu'>
+  <view class='icons' bindtap='linkWorkList' data-workNavId='1'>
+    <view><icon class='iconfont icon-clock'></icon></view>
+    <text class='iconfont'>待维修</text>
+  </view>
+  <view class='icons' bindtap='linkWorkList' data-workNavId='2'>
+    <view><icon class='iconfont icon-weixiuzhong11'></icon></view>
+    <text class='iconfont'>维修中</text>
+  </view>
+  <view class='icons' bindtap='linkWorkList' data-workNavId='5'>
+    <view><icon class='iconfont icon-chenggong'></icon></view>
+    <text class='iconfont'>已完成</text>
+  </view>
+  <view class='icons' bindtap='linkmyManage'>
+    <view><icon class='iconfont icon-kongzhiqi'></icon></view>
+    <text class='iconfont'>控制器</text>
+  </view>
+  <view class='icons' bindtap='linkSpotCheck'>
+    <view><icon class='iconfont icon-wodeguanli'></icon></view>
+    <text class='iconfont'>点位巡查</text>
+  </view>
+  <view class='icons' bindtap='scanCode'>
+    <view><icon class='iconfont icon-richscan_icon'></icon></view>
+    <text class='iconfont'>编辑控制器</text>
+  </view>
+</view>
+<map class='indexMap' style="height:{{mapHeight}}px;" scale="18" longitude="{{locationInfo.longitude}}" latitude="{{locationInfo.latitude}}" markers='{{markers}}'></map>
+

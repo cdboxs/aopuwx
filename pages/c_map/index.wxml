@@ -1,0 +1,37 @@
+<!--pages/c_map/index.wxml-->
+<map class='signMap' style='height:{{signMapH-64}}px;' scale="18" longitude="{{locationInfo.longitude}}" latitude="{{locationInfo.latitude}}" markers='{{markers}}'>
+  <!-- <cover-view class='mapTip'>
+    <cover-view>系统检测到您在</cover-view>
+    <cover-view>{{locationInfo.address}}</cover-view>
+    <cover-view>附近</cover-view>
+  </cover-view> -->
+ 
+</map>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

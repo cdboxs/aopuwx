@@ -1,0 +1,45 @@
+/* pages/member_modular/setPwd/index.wxss */
+
+.setPwd{
+  display: block;
+  width:100%;
+  padding:20rpx;
+  box-sizing: border-box;
+}
+.setPwd input{
+  width:100%;
+  height: 80rpx;
+  padding:0 20rpx;
+  font-size: 30rpx;
+  color:#666;
+  margin:20rpx 0;
+  box-sizing: border-box;
+  border:1px solid #ddd;
+}
+.setPwd button{
+   width:100%;
+  height: 80rpx;
+  color: #fff;
+  line-height: 80rpx;
+  border-radius: 0;
+  background:#2cabe2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

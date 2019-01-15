@@ -1,0 +1,109 @@
+<!--pages/controller/index.wxml-->
+<view class='mask' wx:if="{{maskflag}}" style='height:{{height}}px;'><image src='../img/logo.png'></image></view>
+<view wx:if="{{ybflag}}">
+<block wx:if="{{c.equipmentList.length !=0}}">
+<view class='switchTab' >
+  <text  wx:for="{{c.equipmentList}}" wx:key="key" data-equipmentid='{{item.id}}' bindtap='equipment'>通道{{index+1}}</text>
+</view>
+</block>
+<view class='controller'>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{allSwitch}}"></ec-canvas>
+    <view>市电</view>
+    <view>市电开关： 
+    <text wx:if="{{c.controller.powerFlag==0}}">关</text>
+    <text wx:elif="{{c.controller.powerFlag==1}}">开</text>
+    </view>
+  </view>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{temperature}}"></ec-canvas>
+    <view>温度</view>
+    <view>风扇开关： 
+    <text wx:if="{{c.controller.windFlag==0}}">关</text>
+    <text wx:elif="{{c.controller.windFlag==1}}">开</text>
+    </view>
+  </view>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{humidity}}"></ec-canvas>
+    <view>湿度</view>
+  </view>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{PowerSupply}}"></ec-canvas>
+    <view>12V电源适配器</view>
+  </view>
+</view>
+<view class='showtip'>
+    <view>
+      <icon class='iconfont icon-wifi' style="color:{{c.controllerMonit.upOpticalCableStatus==1 ? 'green': '#cdcdcd'}};"></icon>
+      <text>上行光缆{{c.controllerMonit.upOpticalCableStatus}}</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-80dianliang' style="color:{{c.controllerMonit.powerStatus==1 ? 'green': '#cdcdcd'}};"></icon>
+      <text>24V电源</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-shuixi' style="color:{{c.controllerMonit.isRetting==1 ? 'green': '#cdcdcd'}};"></icon>
+      <text>水浸</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-fuwuqi' style="color:{{c.controllerMonit.serialServerRs232Status==1 ? 'green': '#cdcdcd'}};"></icon>
+      <text>串口服务器</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-lianjie' style="color:{{c.controllerMonit.linkStatus==1 ? 'green': '#cdcdcd'}};"></icon>
+      <text>链路连接</text>
+    </view>  
+</view>
+
+<view class='controllerInformation'>
+  <view class='controllerName'>{{c.controller.name}}</view>
+  <view>
+    <text>IP地址：</text>
+    <text>{{c.controller.ip}}</text>
+  </view>
+  <view>
+    <text>设备编码：</text>
+    <text>{{c.controller.code}}</text>
+  </view>
+  <view>
+    <text>MAC地址：</text>
+    <text>{{c.controller.mac}}</text>
+  </view>
+  <!-- <view>
+    <text>品牌名称：</text>
+    <block wx:for="{{c.equipmentList}}" wx:key="key">
+    <text wx:if="{{item.controllerId==c.controller.bindUserId && item.brand !=null}}">{{item.brand}}</text>
+    </block>
+  </view>
+  <view>
+    <text>设备型号：</text>
+    <text>{{c.controller.model}}</text>
+  </view> -->
+  <view>
+    <text>所属单位：</text>
+    <text>{{c.resDepartName}}</text>
+  </view>
+  <view>
+    <text>维护单位：</text>
+    <text>{{c.maintDepartName}}</text>
+  </view>
+  <view>
+    <text>维护人员：</text>
+    <text>{{c.maintUserName}}</text>
+  </view>            
+</view>
+<view class='controllerBtn'>
+  <view bindtap='linkCMap'>
+    <text class='iconfont icon-ditu'></text>
+    <text>地图</text>
+  </view>
+  <view bindtap='openDoor'>
+    <text class='iconfont icon-lishi'></text>
+    <text>开门</text>
+  </view>
+  <view bindtap='resetController'>
+    <text class='iconfont icon-zhongqi'></text>
+    <text>重启</text>
+  </view>
+</view>
+</view>

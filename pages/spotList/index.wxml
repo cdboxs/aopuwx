@@ -1,0 +1,24 @@
+<!--pages/spotList/index.wxml-->
+<view class='myManage'>
+  <view class='search'>
+    <view class='iconfont icon-sousuo'></view>
+    <input type='search' placeholder='输入点位名称' value="{{result}}" bindinput='getsearchData'></input>
+    <view class='iconfont icon-quxiao' bindtap='del'></view>
+    <scroll-view wx:if="{{searchResult}}" class='searchResult' style="height:{{sHeight-30}}px;" scroll-y bindscrolltolower="searchLoadMore">
+      <view class='managelist' wx:for="{{listControllerS}}" wx:key="key" data-cinfo="{{item}}"  bindtap='linkspotCheck'>
+      <view><text>点位：</text>{{item.controllerName==null ? "暂无" : item.controllerName}}</view>
+      <view><text>所属部门：</text>{{item.resDepartName==null ? "暂无" : item.resDepartName}}</view>
+      <view><text>巡检周期：</text>{{item.routeCycle==null ? "暂无" : item.routeCycle}}</view>
+      <view><text>最近削减日期：</text>{{item.checkTime==null ? "暂无" : item.checkTime}}</view>
+    </view>
+    </scroll-view>
+  </view>
+  <scroll-view scroll-y wx:if="{{slist}}" style='width:94%;height:{{sHeight-30}}px;'bindscrolltolower='getSpotListMore'lower-threshold="2">
+    <view class='managelist' wx:for="{{s}}" wx:key="key" data-cinfo="{{item}}" bindtap='linkspotCheck'>
+      <view><text>点位：</text>{{item.controllerName==null ? "暂无" : item.controllerName}}</view>
+      <view><text>所属部门：</text>{{item.resDepartName==null ? "暂无" : item.resDepartName}}</view>
+      <view><text>巡检周期：</text>{{item.routeCycle==null ? "暂无" : item.routeCycle}}</view>
+      <view><text>最近削减日期：</text>{{item.checkTime==null ? "暂无" : item.checkTime}}</view>
+    </view>
+   </scroll-view>
+</view>

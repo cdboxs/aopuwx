@@ -1,0 +1,56 @@
+/* pages/spotOver/index.wxss */
+.spotOver{
+  display: block;
+  width:96%;
+  margin:0 auto;
+  padding:10rpx;
+  color: #666;
+  font-size: 29rpx;
+  box-sizing: border-box;
+}
+.spotOver view{
+  padding:20rpx 0;
+  border-bottom: 1rpx solid #ddd;
+}
+.spotOver view:nth-of-type(4){
+  border:none;
+}
+.spotOver view.picker{
+  width: 100%;
+  display: flex;
+justify-content: space-between;
+}
+.spotOver view.picker input{
+  width:78%;
+}
+.spotOver textarea{
+  padding:20rpx;
+  margin-top:10rpx;
+  box-sizing: border-box;
+  border:1rpx solid #ddd;
+}
+.spotOver button{
+  width:100%;
+  color:#fff;
+  padding:10rpx 0;
+  font-size: 30rpx;
+  border-radius:0;
+  margin:20rpx auto;
+  background: #2cabe2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

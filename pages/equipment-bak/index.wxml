@@ -1,0 +1,99 @@
+<!--pages/controller/index.wxml-->
+<view class='mask' wx:if="{{maskflag}}" style='height:{{height}}px;'><image src='../img/logo.png'></image></view>
+<view wx:if="{{ybflag}}">
+<view class='controller'>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{allSwitch}}"></ec-canvas>
+    <view>总闸</view>
+    <view>总闸开关： 
+    <text wx:if="{{c.equipmentMonit.workStatus==0}}">关</text>
+    <text wx:elif="{{c.equipmentMonit.workStatus==1}}">开</text>
+    </view>
+  </view>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{temperature}}"></ec-canvas>
+    <view>电流</view>
+    <view>风扇开关： 
+    <text wx:if="{{c.equipment.status==0}}">关</text>
+    <text wx:elif="{{c.equipment.status==1}}">开</text>
+    </view>
+  </view>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{humidity}}"></ec-canvas>
+    <view>丢包率</view>
+  </view>
+  <view class='gauge'>
+    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{PowerSupply}}"></ec-canvas>
+    <view>12V电源适配器</view>
+  </view>
+</view>
+<view class='showtip'>
+    <view>
+      <icon class='iconfont icon-wifi'></icon>
+      <text>上行光缆</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-80dianliang'></icon>
+      <text> 备用电源</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-shuixi'></icon>
+      <text>侵水</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-fuwuqi'></icon>
+      <text>串口服务器</text>
+    </view>
+    <view>
+      <icon class='iconfont icon-lianjie'></icon>
+      <text>链路连接</text>
+    </view>  
+</view>
+
+<view class='controllerInformation'>
+  <view class='controllerName'>{{c.equipment.name}}</view>
+  <view>
+    <text>IP地址：</text>
+    <text>{{c.equipment.ip}}</text>
+  </view>
+  <view>
+    <text>设备编码：</text>
+    <text>{{c.equipment.code}}</text>
+  </view>
+  <view>
+    <text>MAC地址：</text>
+    <text>{{c.equipment.mac}}</text>
+  </view>
+  <view>
+    <text>品牌名称：</text>
+    <text>{{c.equipment.brand}}</text>
+  </view>
+  <view>
+    <text>设备型号：</text>
+    <text>{{c.equipment.model}}</text>
+  </view>
+  <view>
+    <text>所属单位：</text>
+    <text>{{c.resDepartName}}</text>
+  </view>
+  <view>
+    <text>维护单位：</text>
+    <text>{{c.maintDepartName}}</text>
+  </view>
+  <view>
+    <text>维护人员：</text>
+    <text>{{c.maintUserName}}</text>
+  </view>            
+</view>
+<view class='controllerBtn'>
+
+  <view>
+    <text class='iconfont icon-lishi'></text>
+    <text>历史</text>
+  </view>
+  <view bindtap='resetEquipment'>
+    <text class='iconfont icon-zhongqi'></text>
+    <text>重启</text>
+  </view>
+</view>
+</view>

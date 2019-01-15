@@ -1,0 +1,95 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+button::after{border:0;border-radius: 0;}
+.qpink{
+  color:#cc6082;
+  background:#ffe5ee;
+}
+.qyellow{
+  color:#b57d06;
+  background: #fcecd2;
+}
+.qgreen{
+  color:#4aa4a4;
+  background: #dcfaf8;
+}
+.red{
+  color:#f62c2c;
+}
+.textStatus{
+  background:none;
+}
+
+@font-face {
+  font-family: 'iconfont';  
+  src: url('//at.alicdn.com/t/font_857875_dnem915xsrr.eot');
+  src: url('//at.alicdn.com/t/font_857875_dnem915xsrr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_857875_dnem915xsrr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_857875_dnem915xsrr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_857875_dnem915xsrr.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:60rpx;
+  color:#fff;
+  font-style:normal;
+ -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-gongdan:before { content: "\e67e"; }
+
+.icon-80dianliang:before { content: "\e638"; }
+
+.icon-quxiao:before { content: "\e65c"; }
+
+.icon-weixiuzhong11:before { content: "\e6b6"; }
+
+.icon-wifi:before { content: "\e617"; }
+
+.icon-mima:before { content: "\e679"; }
+
+.icon-clock:before { content: "\e627"; }
+
+.icon-ditu:before { content: "\e622"; }
+
+.icon-shijian:before { content: "\e63d"; }
+
+.icon-chenggong:before { content: "\e693"; }
+
+.icon-wodeguanli:before { content: "\e61b"; }
+
+.icon-zhongqi:before { content: "\e6bd"; }
+
+.icon-richscan_icon:before { content: "\e661"; }
+
+.icon-icon--:before { content: "\e650"; }
+
+.icon-kongzhiqi:before { content: "\e6d7"; }
+
+.icon-dianwei:before { content: "\e601"; }
+
+.icon-wodeguanli1:before { content: "\e645"; }
+
+.icon-yuancheng:before { content: "\e630"; }
+
+.icon-shuixi:before { content: "\e619"; }
+
+.icon-lianjie:before { content: "\e7db"; }
+
+.icon-jiantou12:before { content: "\e603"; }
+
+.icon-lishi:before { content: "\e602"; }
+
+.icon-fuwuqi:before { content: "\e65b"; }
+
+.icon-index:before { content: "\e600"; }
+
+.icon-sousuo:before { content: "\e73c"; }

@@ -1,0 +1,107 @@
+<!--pages/workinfo/index.wxml-->
+<view class='workinfo'>
+  <view>
+    <text>派单方式：</text>
+    <text wx:if="{{wi.type==1}}">系统派单</text>
+    <text wx:elif="{{wi.type==2}}">手工派单</text>
+  </view>
+  <view>
+    <text>工单状态：</text>
+    <text wx:if="{{wi.status==0}}" class='textStatus red'>待派单</text>
+    <text wx:elif="{{wi.status==1}}" class='textStatus red'>待维修</text>
+    <text wx:elif="{{wi.status==2}}" class='textStatus qyellow'>维修中</text>
+    <text wx:elif="{{wi.status==3}}" class='textStatus qpink'>待评价</text>
+    <text wx:elif="{{wi.status==4}}" class='textStatus red'>已撤单</text>
+    <text wx:elif="{{wi.status==5}}" class='textStatus qgreen'>已完成</text>
+    <text wx:elif="{{wi.status==6}}" class='textStatus red'>未完成</text>
+  </view>
+  <view>
+    <text>故障时间：</text>
+    <text>{{wi.faultTime}}</text>
+  </view>
+  <view>
+    <text>派单时间：</text>
+    <text>{{wi.orderTime}}</text>
+  </view>
+  <view>
+    <text>维修时间：</text>
+     <text wx:if="{{wi.repairTime==null}}">暂无信息</text>
+    <text  wx:else>{{wi.repairTime}}</text>
+  </view>
+  <view>
+    <text>维修截止时间：</text>
+    <text>{{wi.lastTime}}</text>
+  </view>
+  <view>
+    <text>点位：</text>
+    <text>{{wi.controllerName}}</text>
+  </view>
+  <view>
+    <text>位置：</text>
+    <text class='map' bindtap='linkSignMap'>地图显示</text>
+    <text class='iconfont icon-jiantou12'></text>
+  </view>
+  <view>
+    <text>故障：</text>
+    <text>{{wi.faultContent}}</text>
+  </view>
+  <block wx:if="{{wi.pointType==1}}">
+    <view>
+      <text>供应商：</text>
+      <text>{{wi.controllerFactory}}</text>
+    </view>
+    <view bindtap='callPhone' data-phoneNum='{{wi.controllerFactoryPhone}}'>
+      <text>技术支持：</text>
+      <text>{{wi.controllerFactoryPhone}}</text>
+    </view>
+  </block>
+  <block wx:if="{{wi.pointType==2}}">
+    <view>
+      <text>品牌名称：</text>
+      <text>{{wi.equipmentBrand}}</text>
+    </view>
+    <view bindtap='callPhone' data-phoneNum='{{wi.equipmentFactoryPhone}}'>
+      <text>厂家电话：</text>
+      <text>{{wi.equipmentFactoryPhone}}</text>
+    </view>
+  </block>       
+  <view>
+    <text>维修方式：</text>
+    <text wx:if="{{wi.maintContent==null}}">暂无信息</text>
+    <text wx:else>{{wi.maintContent}}</text>
+  </view>
+  <view>
+    <text>评分：</text>
+    <text wx:if="{{wi.evaluateScore==null}}">暂无信息</text>
+    <text wx:else>{{wi.evaluateScore}}分</text>
+  </view>
+  <view>
+    <text>评价：</text>
+    <text wx:if="{{wi.evaluateContent==null}}">暂无信息</text>
+    <text wx:else>{{wi.evaluateContent}}</text>
+  </view>
+</view>
+<view class='workbtn' wx:if="{{wi.status==1 || wi.status==2}}">
+  <view>修复方案</view>
+  <view bindtap='historyGz' data-cid='{{wi.controllerId}}' data-fcode='{{wi.faultCode}}'>历史故障</view>
+</view>
+<view class='sign' wx:if="{{wi.status==1}}" bindtap='linkSignMap'>签到维修</view>
+<view class='sign' wx:elif="{{wi.status==2}}" bindtap='signShowModal'>维修完成</view>
+<view class='showModal' style='height:{{height}}px;' wx:if="{{showModal}}">
+<form bindsubmit='signOver'>
+  <view class='mask' style='height:{{height}}px;'></view>
+  <view class='content'>
+    <text>请填写内容</text>
+    <textarea value='' name="wxfs" placeholder='请输入维修方式' maxlength='100'></textarea>
+    <view class='btngroup'>
+      <button form-type='submit'>确定</button>
+      <button bindtap='btnFalse'>取消</button>
+    </view>
+  </view>
+  </form>
+</view>
+
+
+
+
+

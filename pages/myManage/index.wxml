@@ -1,0 +1,43 @@
+<!--pages/myManage/index.wxml-->
+<view class='myManage'>
+  <view class='search'>
+    <view class='iconfont icon-sousuo'></view>
+    <input type='search' placeholder='输入点位名称' value="{{result}}" bindinput='getsearchData'></input>
+    <view class='iconfont icon-quxiao' bindtap='del'></view>
+    <scroll-view wx:if="{{searchResult}}" class='searchResult' style="height:{{searchResult?searchResultHeight:0}}px;" scroll-y bindscrolltolower="searchLoadMore">
+      <view wx:for="{{listControllerS}}" wx:key="key" data-mmid="{{item.id}}" bindtap='linkManageInfo'>
+        <text>{{item.name}}</text>
+        <text>{{item.maintOffice.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+  <scroll-view scroll-y style='width:94%;height:{{searchResultHeight-20}}px;'bindscrolltolower='getMoreControllerData'lower-threshold="10">
+    <view class='managelist' wx:for="{{listController}}" wx:key="key" data-mmid="{{item.id}}" bindtap='linkManageInfo'>
+      <view><text>点位：</text>{{item.name==null ? "暂无" : item.name}}</view>
+      <view><text>所属部门：</text>{{item.maintOffice.name}}</view>
+    </view>
+   </scroll-view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

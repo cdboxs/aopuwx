@@ -1,0 +1,43 @@
+<!--巡检完毕-->
+<form class='spotOver' bindsubmit='sendCheck'>
+<view>点位：{{so.controllerName}}</view>
+<view>所属部门：{{so.resDepartName}}</view>
+<input type='text' value="{{so.routeCheckId}}" name="routeCheckId" style='display:none;'></input>
+<view>巡检时间：{{so.checkTime==null ? '暂无数据':so.checkTime}}</view>
+<view>
+ <picker bindchange="resultCheck" value="{{rcindex}}" range="{{checkResult}}">
+    <view class="picker">巡检结果：<input type='text' value='{{checkResult[rcindex]}}' name="selectResult" placeholder='请填巡检结果' disabled='true'></input></view>
+    
+  </picker>
+</view>
+<textarea wx:if="{{rcindex==3}}" placeholder='请输入巡检结果' name="otherResult"></textarea>
+<button form-type='submit'>提交</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
