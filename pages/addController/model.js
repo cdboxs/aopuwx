@@ -4,7 +4,20 @@ class Model extends Tm{
   constructor(){
     super();
   }
-
+  //是否可以编辑
+  isEditor(cmac,token, callback){
+    let parameter = {
+      url: '/api/judgeMac.json?token=' + token,
+      data: {
+        mac:cmac
+      },
+      type: 'POST',
+      sCallBack(res) {
+        callback && callback(res);
+      }
+    }
+    this.request('encode', parameter);
+  }
   // 获取所属单位
   getRes_depart(token,callback){
     let parameter = {
@@ -50,21 +63,6 @@ class Model extends Tm{
       type: 'POST',
       data: {
         controller: fmData,
-        // equipments:[{
-        //   code:'1',
-        //   name:'2',
-        //   type_id:'3',
-        //   brand_id:'4',
-        //   model_id:'5',
-        //   brand:'6',
-        //   model:'7',
-        //   ip:'192.168.0.1',
-        //   mac:'SDF24SDF4S',
-        //   controller_id:'1',
-        //   res_depart_id:'2',
-        //   maint_depart_id:'3',
-        //   maint_user_id:'4'
-        // }]
       },
       sCallBack(res) {
         callback && callback(res)
@@ -75,17 +73,16 @@ class Model extends Tm{
   
   getSearchCData( token, smac, callBack) {
     let parameter = {
-      url: '/manage/listController?token=' + token + '&page=1&limit=10',
+      url: '/api/queryController.json?token=' + token,
       type: 'POST',
       data: {
-        mac:smac,
-        name: ''
+        mac:smac
       },
       sCallBack(res) {
         callBack && callBack(res);
       }
     };
-    this.request('json', parameter);
+    this.request('encode', parameter);
   }
 }
 export{Model}

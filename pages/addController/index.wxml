@@ -18,7 +18,7 @@
     </view> -->
     <view>
       <label>MAC地址：</label>
-      <input type='text' value='{{c_info[3]}}' name="mac" disabled='disabled'></input>
+      <input type='text' value='{{cmac}}' name="mac" disabled='disabled'></input>
     </view>
   </view>
   <view class='mantainInfo'>
@@ -28,26 +28,25 @@
    
     <view>
       <label>控制器名称：</label>
-      <input type='text' value='{{cInfo.name}}' name="name" placeholder='请输入控制器'></input>
-       <input type='text' value='{{cInfo.id}}' name="cid" style='display:none;'></input>
+      <input type='text' value='{{cInfo.controllerName}}' name="name" placeholder='请输入控制器' disabled="{{cEStatus}}"></input>
     </view>
     <view>
       <label>所属单位：</label>
-      <picker value="{{resindex}}" range='{{getRes_depart}}' range-key='name' bindchange='s_res_depart'>
+      <picker value="{{resindex}}" range='{{getRes_depart}}' range-key='name' bindchange='s_res_depart'  disabled="{{cEStatus}}">
          <input type='text' value='{{getRes_depart[resindex].id}}' name="res_depart_id" placeholder='请选择所属单位' style='display:none;'></input>
         <input type='text' value='{{getRes_depart[resindex].name}}' placeholder='请选择所属单位' disabled='disabled'></input>
       </picker>
     </view>
     <view>
       <label>维护单位：</label>
-      <picker value="{{maintindex}}" range='{{getMaint_depart}}' range-key='name' bindchange='maint_depart'>
+      <picker value="{{maintindex}}" range='{{getMaint_depart}}' range-key='name' bindchange='maint_depart'  disabled="{{cEStatus}}">
         <input type='text' value='{{getMaint_depart[maintindex].id}}' name="maint_depart_id" placeholder='请选择维护单位' style='display:none;'></input>
         <input type='text' value='{{getMaint_depart[maintindex].name}}'  placeholder='请选择维护单位' disabled='disabled'></input>
       </picker>
     </view>
     <view>
       <label>维护人员：</label>
-      <picker value="{{userindex}}" range='{{getMaintUser}}' range-key='userName' bindchange='maint_user'>
+      <picker value="{{userindex}}" range='{{getMaintUser}}' range-key='userName' bindchange='maint_user'  disabled="{{cEStatus}}">
         <input type='text' value='{{getMaintUser[userindex].id}}' name="maint_user_id" placeholder='请选择维护人员' style='display:none;'></input>
         <input type='text' value='{{getMaintUser[userindex].userName}}' placeholder='请选择维护人员' disabled='disabled'></input>
       </picker>
@@ -55,6 +54,7 @@
       <input type='hidden' name="model" value='100001' style='display:none;'></input>
   </view>
 
-  <button type="default" form-type='submit' class='addCsend'>保存</button>
+  <button type="default" form-type='submit' class='addCsend' style="display:{{cEStatus?'none':''}};">保存</button>
 </form>
+
 
