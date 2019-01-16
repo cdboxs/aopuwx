@@ -11,21 +11,20 @@ Page({
   data: {
     cmac:"",
     cInfo:{},
-    resindex:'',
-    maintindex:'',
-    userindex:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.result);
     that=this;
     that.setData({ cmac: options.result});
     let userInfo = wx.getStorageSync('userInfo');
     let fmData = {
       mac: options.result,
     }
+
     // 查询控制器
     m.getSearchCData(userInfo.token, options.result, (res) => {
       //判断不存在
@@ -43,13 +42,20 @@ Page({
         });
         return;
       } else {
-   
         //判断已存在
+        that.setData({
+          cInfo: res.data.data[0]
+        });//
         //获取所属单位
         m.getRes_depart(userInfo.token, (res) => {
-          if (res.data.data.length != 0 ) {
-            that.setData({
-              getRes_depart: res.data.data
+          if (res.data.data.length != 0 && that.data.cInfo.resDepartName !=null) {
+            res.data.data.map((item, index) => {
+              if (item.name == that.data.cInfo.resDepartName) {
+                that.setData({
+                  resindex: index,
+                  getRes_depart: res.data.data
+                });
+              }
             });
           } else {
             wx.showToast({
@@ -63,11 +69,18 @@ Page({
 
         //获取维护单位
         m.getMaint_depart(userInfo.token, (res) => {
-          if (res.data.data.length != 0) {
-            that.setData({
-              getMaint_depart: res.data.data
+          if (res.data.data.length != 0 && that.data.cInfo.maintDepartName !=null) {
+            let MaintdepartId = "";
+            res.data.data.map((item, index) => {
+              if (item.name == that.data.cInfo.maintDepartName) {
+                that.setData({
+                  maintindex: index,
+                  getMaint_depart: res.data.data
+                });
+                MaintdepartId = item.id
+              }
             });
-            
+            that.getMaintUser(MaintdepartId);
           } else {
             wx.showToast({
               title: '获取数据失败',
@@ -129,7 +142,30 @@ Page({
   onShareAppMessage: function () {
 
   },
- 
+  //获取维护人员
+  getMaintUser(id) {
+    let userInfo = wx.getStorageSync('userInfo');
+    m.getMaintUser(id, userInfo.token, (res) => {
+      if (res.data.data.length != 0) {
+        res.data.data.map((item, index) => {
+          if (item.userName == that.data.cInfo.maintUserName) {
+            that.setData({
+              getMaintUser: res.data.data,
+              userindex: index
+            });
+          }
+        });
+
+      } else {
+        wx.showToast({
+          title: '获取数据失败',
+          mask: true,
+          icon: 'none'
+        });
+        return;
+      }
+    });//
+  },
   // 选择所属单位
   s_res_depart(e){
 
@@ -140,31 +176,23 @@ Page({
   },
   //维护单位
   maint_depart(e){
-
     let userInfo = wx.getStorageSync('userInfo');
     that=this;
     that.setData({
       maintindex:e.detail.value,
     });
-    //获取维护单位
-    m.getMaint_depart(userInfo.token, (res) => {
-
+    m.getMaintUser(that.data.getMaint_depart[e.detail.value].id, userInfo.token, (res) => {
       if (res.data.data.length != 0) {
-        let mid="";
-        res.data.data.map((item,index)=>{
-          if (index == e.detail.value){
-              mid=item.id
-          }
+        that.setData({
+          getMaintUser: res.data.data,
+          userindex: e.detail.value
         });
- 
-        that.getMaintUser(mid);
       } else {
         wx.showToast({
-          title: '获取数据失败',
+          title: '获取所属单位失败',
           mask: true,
           icon: 'none'
         });
-        return;
       }
     });
   },
@@ -175,28 +203,8 @@ Page({
       userindex: e.detail.value,
     });
   },
-  //获取维护人员
-  getMaintUser(id) {
-    let userInfo = wx.getStorageSync('userInfo');
-    m.getMaintUser(id, userInfo.token, (res) => {
-      if (res.data.data.length != 0) {
-        that.setData({
-          getMaintUser: res.data.data
-        });
-
-      } else {
-        wx.showToast({
-          title: '获取维护人员失败',
-          mask: true,
-          icon: 'none'
-        });
-        return;
-      }
-    });//
-  },
   //添加控制器
   addController(res){
-    console.log(res);
     let userInfo = wx.getStorageSync('userInfo');
     let fmData={
         name: res.detail.value.name,
@@ -207,7 +215,6 @@ Page({
         bind_user_id: userInfo.userId
 
     }
-   
     m.addController(fmData, userInfo.token,(res)=>{
       console.log(res)
       if(res.data.code==0){
@@ -223,20 +230,9 @@ Page({
         },1500);
       } else if (res.data.code == 9000){
         wx.showToast({
-          title: res.data.msg,
+          title: '保存失败',
           mask: true,
-          icon: 'none'
-        });
-        setTimeout(() => {
-          wx.switchTab({
-            url: '../index/index',
-          })
-        }, 1500);
-      } else if (res.data.code == 9999) {
-        wx.showToast({
-          title: res.data.msg,
-          mask: true,
-          icon: 'none'
+          icon: 'success'
         });
         setTimeout(() => {
           wx.switchTab({

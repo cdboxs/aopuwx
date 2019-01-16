@@ -5,11 +5,11 @@ class Model extends Tm{
     super();
   }
   //是否可以编辑
-  isEditor(cmac, token, callback) {
+  isEditor(cmac,token, callback){
     let parameter = {
       url: '/api/judgeMac.json?token=' + token,
       data: {
-        mac: cmac
+        mac:cmac
       },
       type: 'POST',
       sCallBack(res) {

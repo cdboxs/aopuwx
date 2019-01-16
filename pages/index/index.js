@@ -16,15 +16,7 @@ Page({
         mapHeight: app.globalData.windowHeight - res[0].top
       });
     });
-    // let userInfo = wx.getStorageSync('userInfo');
-    // m.getBanner(userInfo.token).then(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
+
   },
   onShow:function(){
     
@@ -85,12 +77,28 @@ Page({
    * */ 
   scanCode(){
     wx.scanCode({
-      onlyFromCamera:false,
+      onlyFromCamera:true,
       scanType: 'qrCode',
       success(e){
-        wx.navigateTo({
-          url: '../addController/index?result=' + e.result,
-        })
+        console.log(e);        
+        let userInfo = wx.getStorageSync('userInfo');
+        m.isEditor(e.result, userInfo.token, (res) => {     
+          //code=1编辑控制器 code=2查询控制器信息
+          if (res.data.code == 1) {
+            wx.navigateTo({
+              url: '../addController/index?result='+ e.result,
+            })
+          } else if (res.data.code == 2) {
+            wx.navigateTo({
+              //url: '../addController/index?result=' + e.result,
+              url: '../aSController/index?result=' + e.result,
+            })
+          }
+        });
+       
+      },
+      fail(res){
+        console.log(res);
       }
     })
   }

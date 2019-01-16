@@ -16,6 +16,20 @@ class Model extends Tm{
     }
     return this.ajax('encode',parameter);
   }
+  //是否可以编辑
+  isEditor(cmac, token, callback) {
+    let parameter = {
+      url: '/api/judgeMac.json?token=' + token,
+      data: {
+        mac: cmac
+      },
+      type: 'POST',
+      sCallBack(res) {
+        callback && callback(res);
+      }
+    }
+    this.request('encode', parameter);
+  }
   
 }
 export {Model}

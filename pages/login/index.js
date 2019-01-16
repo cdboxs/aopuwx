@@ -92,7 +92,6 @@ Page({
         icon: 'none'
       })
       m.login({ loginName: e.detail.value.phone, loginPass: e.detail.value.pwd},(res) => {   
-       console.log(res);
         if(res.data.code !=0){
           wx.hideLoading()
           wx.showToast({

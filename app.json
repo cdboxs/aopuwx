@@ -3,6 +3,7 @@
     "pages/login/index",
     "pages/index/index",
     "pages/addController/index",
+    "pages/aSController/index",
     "pages/c_map/index",
     "pages/worklist/index",
     "pages/workinfo/index",
