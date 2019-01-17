@@ -31,7 +31,7 @@
   width: 40rpx;
   height: 40rpx;
   border-radius: 50%;
-  background: green;
+  background: #666;
 }
 
 .equipment view{

@@ -21,7 +21,7 @@ Page({
     let userInfo = wx.getStorageSync('userInfo');
 
     m.getEquipmentData(options.id, userInfo.token, (res) => {
-      console.log(res);
+      //console.log(res);
       if (res.data.code == 0 && res.data.data != null) {
         that.setData({
           e: res.data.data,

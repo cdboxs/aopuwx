@@ -48,5 +48,33 @@ class Model extends Tm{
     }
     this.request('encode', parameter);
   }
+  mainSwitch(c_id, powerflagStatus, token, callback) {
+    let parameter = {
+      url: '/manage/saveControllerPower?token=' + token,
+      data: {
+        id: c_id,
+        powerFlag:powerflagStatus
+      },
+      type: 'POST',
+      sCallBack(res) {
+        callback && callback(res);
+      }
+    }
+    this.request('encode', parameter);
+  }
+  fanSwitch(c_id, windflagStatus, token, callback) {
+    let parameter = {
+      url: '/manage/saveControllerWind?token=' + token,
+      data: {
+        id: c_id,
+        windFlag: windflagStatus
+      },
+      type: 'POST',
+      sCallBack(res) {
+        callback && callback(res);
+      }
+    }
+    this.request('encode', parameter);
+  }
 }
 export {Model}

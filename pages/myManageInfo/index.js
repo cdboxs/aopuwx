@@ -24,7 +24,7 @@ Page({
     that.getControllerData();
     that.setData({
       allSwitch: { onInit: that.allSwitch },//总闸
-      temperature: { onInit:that.temperature},//温度
+      temperature: { onInit:that.temperature},//24V
       humidity: { onInit: that.humidity},//湿度
       PowerSupply:{ onInit: that.PowerSupply}//电源
     });
@@ -48,6 +48,10 @@ Page({
   allSwitch(canvas, width, height) {
     var that = this;
     var CPS = wx.getStorageSync('controllerParam');
+    that.setData({
+      wd: CPS.controllerMonit.tempNum,
+      sd: CPS.controllerMonit.dampNum
+    });
     const chart = echarts.init(canvas, null, {
       width: width,
       height: height
@@ -67,7 +71,7 @@ Page({
     return chart;
     
   },
-  /*温度*/
+  /*24V*/
   temperature(canvas, width, height) {
     var that = this;
     var CPS = wx.getStorageSync('controllerParam');
@@ -75,11 +79,11 @@ Page({
       width: width,
       height: height
     });
-    option.series[0].data[0].value = CPS.controllerMonit.tempNum == null ? -50 : CPS.controllerMonit.tempNum;
+    option.series[0].data[0].value = CPS.controllerMonit.powerAdapterVoltage == null ? 0 : CPS.controllerMonit.powerAdapterVoltage;
     //option.series[0].data[0].value = 47
-    option.series[0].detail.formatter = "{value}℃",
-    option.series[0].min = -50
-    option.series[0].max = 120
+    option.series[0].detail.formatter = "{value}V",
+    option.series[0].min = 0
+    option.series[0].max = 80
     option.series[0].splitNumber =10 
     //option.series[0].axisLine.lineStyle.color = [[0.2, '#ff4500'], [0.8, 'green'], [1, '#ff4500']],
     option.series[0].axisLine.lineStyle.color = [[0.2, 'green'], [0.8, 'green'], [1, 'green']],
@@ -87,7 +91,7 @@ Page({
     chart.setOption(option, true);
     return chart;
   },
-  /*湿度*/
+  /*12V总电流*/
   humidity(canvas, width, height) {
     var that = this;
     var CPS = wx.getStorageSync('controllerParam');
@@ -95,12 +99,12 @@ Page({
       width: width,
       height: height
     });
-    console.log(CPS.controllerMonit.dampNum);
-    option.series[0].data[0].value = CPS.controllerMonit.dampNum == null ? 0 : CPS.controllerMonit.dampNum;
+
+    option.series[0].data[0].value = CPS.controllerMonit.electricTotal == null ? 0 : CPS.controllerMonit.electricTotal;
     //option.series[0].data[0].value = 61
-    option.series[0].detail.formatter = "{value}%RH",
+    option.series[0].detail.formatter = "{value}A",
       option.series[0].min = 0
-    option.series[0].max = 100
+    option.series[0].max = 10
     option.series[0].splitNumber = 10
     //option.series[0].axisLine.lineStyle.color = [[0.2, '#ff4500'], [0.8, 'green'], [1, '#ff4500']],
     option.series[0].axisLine.lineStyle.color = [[0.2, 'green'], [0.8, 'green'], [1, 'green']],
@@ -108,7 +112,7 @@ Page({
     chart.setOption(option, true);
     return chart;
   },
-  /*电源适配器*/
+  /*12V电源适配器*/
   PowerSupply(canvas, width, height) {
     var that = this;
     var CPS = wx.getStorageSync('controllerParam');
@@ -163,6 +167,15 @@ Page({
            icon: 'none'
          })
        },1000);
+     }else{
+       setTimeout(() => {
+         wx.hideLoading();
+         wx.showToast({
+           title: '重启失败',
+           mask: true,
+           icon: 'none'
+         })
+       }, 1000);
      }
      
     });
@@ -172,10 +185,49 @@ Page({
       url: '../c_map/index',
     })
   },
+  //总闸开关
+  mainSwitch(){
+    wx.showModal({
+      title: '总闸授权',
+      content: '是否授权总闸开关？',
+      success(res) {
+        if (res.confirm) {
+          let userInfo = wx.getStorageSync('userInfo');
+          m.mainSwitch(that.data.c_id, userInfo.token, (res) => {
+            // 0关闭 1开启
+            console.log(res);
+       
+          })
+        } else {
+          return;
+        }
+      }
+    })
+  },
+  //风扇开关
+  fanSwitch(e) {
+    console.log(e.currentTarget.dataset.windflag);
+    wx.showModal({
+      title: '风扇授权',
+      content: '是否授权风扇开关？',
+      success(res) {
+        if (res.confirm) {
+          let userInfo = wx.getStorageSync('userInfo');
+          m.fanSwitch(that.data.c_id, e.currentTarget.dataset.windflag, userInfo.token, (res) => {
+            // 0关闭 1开启
+            console.log(res);
+
+          })
+        } else {
+          return;
+        }
+      }
+    })
+  },
   openDoor(){
     wx.showModal({
       title: '授权开门',
-      content: '会否开启当前点位柜门开关',
+      content: '是否授权此点位开门？',
       success(res){
         if(res.confirm){
             let userInfo = wx.getStorageSync('userInfo');

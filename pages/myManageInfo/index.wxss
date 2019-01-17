@@ -20,14 +20,19 @@
   height: 100rpx;
   display: flex;
   flex-flow: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border-bottom:1rpx solid #ddd;
 }
 .switchTab text{
+  display: inline-block;
   margin:0 20rpx;
   font-size: 30rpx;
   font-weight: bold;
+  padding:10rpx 25rpx;
+  color:#fff;
+  background: #2cabe2;
+  border-radius:10rpx;
 }
 .controller {
   width: 100%;
@@ -73,6 +78,21 @@ canvas {
   margin: 0 auto;
   padding: 0;
 }
+.ws{
+  width:90%;
+  display: flex;
+  justify-content: space-around;
+  padding:20rpx 0;
+  font-size: 30rpx;
+  color:#777;
+  margin:0 auto 20rpx;
+}
+.ws text:first-child{
+  color:#2cabe2;
+}
+.ws text:last-child{
+  color:green;
+}
 .showtip{
   width:100%;
   padding-bottom:20rpx;
@@ -87,12 +107,19 @@ canvas {
   flex-flow: row wrap;
   justify-content:center;
 }
+.showtip view image{
+  width:60rpx;
+  height: 60rpx;
+}
 .showtip view text{
   display: block;
   width:100%;
   color:#b8b8b8;
   font-size: 25rpx;
   text-align: center;
+}
+.showtip view .iconfont{
+  font-size: 60rpx;
 }
 
 .controllerInformation{
@@ -114,8 +141,17 @@ canvas {
   width:100%;
   color:#2cabe3;
   font-size: 33rpx;
-  padding-left:15rpx;
+  padding:0 15rpx;
+  box-sizing: border-box;
   border-left:10rpx solid #2cabe3;
+  display: flex;
+  justify-content: space-between;
+}
+.controllerInformation view.controllerName image{
+  width:60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border:4rpx solid #2cabe3;
 }
 .controllerInformation view text:nth-of-type(1){
   width: 35%;
@@ -132,7 +168,7 @@ canvas {
   justify-content: space-around;
 }
 .controllerBtn view{
-  width:25%;
+  width:35%;
   height: 100rpx;
   display: flex;
   flex-flow: row wrap;
@@ -140,7 +176,13 @@ canvas {
   align-items: center;
   border-radius: 10rpx;
   padding:0 30rpx;
+  margin:20rpx;
   box-sizing: border-box;
+  background: green;
+}
+.controllerBtn view image{
+  width: 50rpx;
+  height: 50rpx;
 }
 .controllerBtn view .iconfont{
   color:#fff;
@@ -150,13 +192,8 @@ canvas {
 }
 .controllerBtn view text{
   color:#fff;
+  font-size: 33rpx;
 }
-.controllerBtn view:nth-of-type(1){
-  background: #2cabe3;
-}
-.controllerBtn view:nth-of-type(2){
-  background: #e1c866;
-}
-.controllerBtn view:nth-of-type(3){
-  background: #f9656a;
+.controllerBtn view:last-child{
+  background:#f62c2c;
 }
