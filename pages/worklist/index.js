@@ -25,17 +25,24 @@ Page({
       let userInfo = wx.getStorageSync('userInfo');
       //工单状态（""：所有、0：待派单、1：待维修、2：维修中、3：待评价、4：已撤单、5：已完成、6：未完成）
       m.getWorkAllData("", userInfo.token, (res) => {
-    
+        console.log(res);
         if (res.data.code == 0) {
-          let result=res.data.data;
-          result.forEach((item)=>{
-            if (item.maintUserId==userInfo.userId){
+          let result = res.data.data;
+
+          result.map((item, index) => {
+            if (item.maintUserId == userInfo.userId) {
               item.faultContent = item.faultContent.substring(0, 10);
             }
-          })
+            if (item.pointType == 2) {
+              m.getEquipmentData(item.equipmentId, userInfo.token, (res) => {
+                item.controllerName = res.data.data.controllerName;
+              });
+            }
+          });
           that.setData({
             getWorkAllData: result
           });
+
           m.hideLoading(500);
         } else {
           wx.showToast({
@@ -54,13 +61,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    getWorkAllData:[]
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     if(app.globalData.worknavid==1){
       m.query('.active', (res) => {
         that.setData({
@@ -141,7 +149,7 @@ Page({
   linkWorkinfo(e){
     wx.setStorageSync('workInfo',e.currentTarget.dataset.workinfo);
     wx.navigateTo({
-      url: '../workinfo/index?id=' + e.currentTarget.dataset.id
+      url: '../workinfo/index?id=' + e.currentTarget.dataset.id + '&equipmentCname=' + e.currentTarget.dataset.equipmentcname
     })
   },
   workNav(e){
@@ -160,7 +168,6 @@ Page({
           if (item.faultContent!=null){
             item.faultContent = item.faultContent.substring(0, 13);
           }
-          
         })
         that.setData({
           getWorkAllData: result
@@ -187,7 +194,6 @@ Page({
   },
   // 加载更多
   getWorkMoreData(e){
-    console.log(e.currentTarget.dataset.id);
     let userInfo = wx.getStorageSync('userInfo');
     that.data.page=parseInt(that.data.page)+1;
     m.getWorkMoreData(that.data.page, 10, e.currentTarget.dataset.id, userInfo.token,(res)=>{

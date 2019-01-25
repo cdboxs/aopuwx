@@ -34,11 +34,12 @@
   </view>
   <view>
     <text>点位：</text>
-    <text>{{wi.controllerName}}</text>
+    <text wx:if="{{wi.pointType==1}}">{{wi.controllerName}}</text>
+    <text wx:elif="{{wi.pointType==2}}">{{wi.equipmentCname}}</text>
   </view>
   <view>
     <text>位置：</text>
-    <text class='map' bindtap='linkSignMap'>地图显示</text>
+    <text class='map' data-onlymap="1" bindtap='linkSignMap'>地图显示</text>
     <text class='iconfont icon-jiantou12'></text>
   </view>
   <view>

@@ -19,5 +19,18 @@ class Model extends Tm{
     }
     this.request("encode",parameter);
   }
+  getCData(c_id, token, callBack) {
+    let parameter = {
+      url: '/manage/findControllerMonit?token=' + token,
+      type: 'POST',
+      data: {
+        controllerId: c_id
+      },
+      sCallBack(res) {
+        callBack && callBack(res);
+      }
+    };
+    this.request('encode', parameter);
+  }
 }
 export{Model}

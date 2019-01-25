@@ -19,12 +19,11 @@
   border-left: 10rpx solid #2cabe3;
 }
 
-.controllerName .green {
+.controllerName text {
   display: block;
   width: 40rpx;
   height: 40rpx;
   border-radius: 50%;
-  background: green;
 }
 .controllerName .black {
   display: block;

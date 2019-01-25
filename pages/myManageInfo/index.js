@@ -138,6 +138,7 @@ Page({
   getControllerData() {
     let userInfo = wx.getStorageSync('userInfo');
     m.getControllerData(that.data.c_id, userInfo.token, (res) => {
+      //console.log(res);
       if(res.data.code==0 && res.data.data !=null){
         wx.setStorageSync('controllerParam', res.data.data);
         setTimeout(()=>{
@@ -158,6 +159,7 @@ Page({
     m.showLoading('正在重启','none');
     let userInfo = wx.getStorageSync('userInfo');
     m.resetController(that.data.c_id, userInfo.token, (res) => {
+      //console.log(res);
      if(res.data.code==0){
        setTimeout(()=>{
          wx.hideLoading();
@@ -186,17 +188,24 @@ Page({
     })
   },
   //总闸开关
-  mainSwitch(){
+  mainSwitch(e){
     wx.showModal({
       title: '总闸授权',
       content: '是否授权总闸开关？',
       success(res) {
         if (res.confirm) {
           let userInfo = wx.getStorageSync('userInfo');
-          m.mainSwitch(that.data.c_id, userInfo.token, (res) => {
+          m.mainSwitch(that.data.c_id, e.currentTarget.dataset.powerflag,userInfo.token, (res) => {
             // 0关闭 1开启
-            console.log(res);
-       
+            setTimeout(() => {
+              wx.hideLoading();
+              wx.showToast({
+                title: '操作成功',
+                mask: true,
+                icon: 'none'
+              })
+            }, 1000);
+            that.onShow();
           })
         } else {
           return;
@@ -206,7 +215,7 @@ Page({
   },
   //风扇开关
   fanSwitch(e) {
-    console.log(e.currentTarget.dataset.windflag);
+    //console.log(e.currentTarget.dataset.windflag);
     wx.showModal({
       title: '风扇授权',
       content: '是否授权风扇开关？',
@@ -215,8 +224,16 @@ Page({
           let userInfo = wx.getStorageSync('userInfo');
           m.fanSwitch(that.data.c_id, e.currentTarget.dataset.windflag, userInfo.token, (res) => {
             // 0关闭 1开启
-            console.log(res);
-
+            //console.log(res);
+            setTimeout(() => {
+              wx.hideLoading();
+              wx.showToast({
+                title: '操作成功',
+                mask: true,
+                icon: 'none'
+              })
+            }, 1000);
+            that.onShow();
           })
         } else {
           return;
@@ -233,7 +250,7 @@ Page({
             let userInfo = wx.getStorageSync('userInfo');
             m.openDoor(that.data.c_id, userInfo.token,(res)=>{
               // -2：参数错误，104：控制失效，200：控制成功，500：设备端异常，9000：服务异常
-            
+            //console.log(res);
               switch(res.data.code){
                 case -2:
                   wx.showToast({

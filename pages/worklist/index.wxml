@@ -23,9 +23,10 @@
         <text wx:elif="{{item.status==6}}" class='status red'>未完成</text>
         </view>
         <view class='workbody'>
-          <view>地点：{{item.controllerName}}</view>
+         <view>点位：{{item.controllerName}}</view>
+          <!-- <view wx:elif="{{item.pointType==2}}">点位：{{equipmentCname}}</view> -->
           <view>故障：{{item.faultContent}}... 
-          <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
+          <text data-id='{{item.id}}' data-workinfo="{{item}}" data-equipmentCname="{{equipmentCname}}"bindtap='linkWorkinfo'>详情>></text></view>
         </view>
     </view>
   </scroll-view>
@@ -45,8 +46,8 @@
           <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
         </view>
         <view class='workbody'>
-          <view>地点：{{item.controllerName}}</view>
-          <view>故障：{{item.faultContent}} 
+          <view>点位：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}}...
           <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
         </view>
     </view>
@@ -66,8 +67,8 @@
           <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
         </view>
         <view class='workbody'>
-          <view>地点：{{item.controllerName}}</view>
-          <view>故障：{{item.faultContent}} 
+         <view>点位：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}}... 
           <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
         </view>
     </view>
@@ -87,8 +88,8 @@
           <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
         </view>
         <view class='workbody'>
-          <view>地点：{{item.controllerName}}</view>
-          <view>故障：{{item.faultContent}} 
+         <view>点位：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}}... 
           <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
         </view>
     </view>
@@ -109,8 +110,8 @@
           <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
         </view>
         <view class='workbody'>
-          <view>地点：{{item.controllerName}}</view>
-          <view>故障：{{item.faultContent}} 
+          <view>点位：{{item.controllerName}}</view>
+          <view>故障：{{item.faultContent}}... 
           <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
         </view>
     </view>
@@ -130,7 +131,7 @@
           <view wx:elif="{{item.status==6}}" class='status qpink'>未完成</view>
         </view>
         <view class='workbody'>
-          <view>地点：{{item.controllerName}}</view>
+         <view>点位：{{item.controllerName}}</view>
           <view>故障：{{item.faultContent}}... 
           <text data-id='{{item.id}}' data-workinfo="{{item}}"bindtap='linkWorkinfo'>详情>></text></view>
         </view>

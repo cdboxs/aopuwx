@@ -23,7 +23,6 @@ Page({
     }else{
       let userInfo=wx.getStorageSync('userInfo');
       m.m_setMyInfo({ userName: e.detail.value.userName }, userInfo.token,(res)=>{
-        console.log(res);
         if(res.data.code==0){
           wx.showToast({
             title: '修改成功',
@@ -70,9 +69,19 @@ Page({
    */
   onShow: function () {
     let that=this;
-    let userName=wx.getStorageSync('userInfo');
-    that.setData({
-      userName: userName.userName
+    let userInfo=wx.getStorageSync('userInfo');
+    m.geUserInfo(userInfo.token, res => {
+      if (res.data.code == 0) {
+        that.setData({
+          userInfo: res.data.data
+        });
+      } else {
+        wx.showToast({
+          title: '获取数据失败',
+          mask: true,
+          icon: 'none'
+        })
+      }
     });
 
   },

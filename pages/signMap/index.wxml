@@ -1,5 +1,6 @@
 <!--pages/workMap/index.wxml-->
-<map class='signMap' style='height:{{signMapH-64}}px;' scale="18" longitude="{{lng}}" latitude="{{lat}}" markers='{{markers}}'>
+<map class='signMap' style='height:{{signMapH-64}}px;' scale="5" longitude="{{lng}}" latitude="{{lat}}" markers='{{marker}}'>
+<block wx:if="{{onlymap!=1}}">
   <cover-view class='mapTip'>
     <cover-view>系统检测到您在</cover-view>
     <cover-view>{{myAddress.address}}</cover-view>
@@ -11,4 +12,5 @@
       <cover-view>{{nowTime}}</cover-view>
   </cover-view>
   <cover-image src='../img/myPosition.png' class='myPosition' style='right:{{signBtnLeft/20}}px' bindtap='myLocation'></cover-image>
+  </block>
 </map>

@@ -19,7 +19,7 @@ Page({
     that = this;
     let userInfo = wx.getStorageSync('userInfo');
     m.getHlist(1, options.cid, options.fcode,userInfo.token,(res)=>{
-      // console.log(res);
+       console.log(res);
       that.setData({
         history:res.data.data
       });

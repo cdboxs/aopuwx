@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/login/index",
+    "pages/c_map/index",
     "pages/index/index",
     "pages/addController/index",
     "pages/aSController/index",
-    "pages/c_map/index",
     "pages/worklist/index",
     "pages/workinfo/index",
     "pages/signMap/index",
@@ -23,7 +23,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2cabe2",
     "navigationBarTitleText": "奥普泰光通信有限公司",
-    "navigationBarTextStyle": "#fff"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#000000",

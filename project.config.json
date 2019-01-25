@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.0",
+	"libVersion": "2.5.1",
 	"appid": "wxfea5e6bc729f69ba",
 	"projectname": "aopu",
 	"debugOptions": {

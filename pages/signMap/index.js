@@ -21,6 +21,7 @@ Page({
     m.query('.signBtn',(e)=>{
       that.setData({
         id:options.id,
+        onlymap: options.onlymap,
         signBtnLeft:app.globalData.windowWidth-e[0].width
       });
     })
@@ -37,12 +38,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    that.myLocation();
+    that.location();
     that.getNowTime();
     setInterval(()=>{
      that.getNowTime(); 
     },10000);
-    console.log(getCurrentPages()[0].data.workNavId);
    
   },
   getNowTime(){
@@ -144,38 +144,41 @@ Page({
             longitude: zb.lng,
             width: 36,
             height: 36
+          },
+          {
+            iconPath: "../img/mylcation.png",
+            id: 0,
+            latitude: myLocation.latitude,
+            longitude: myLocation.longitude,
+            width: 36,
+            height: 36
           }
         ]
-        console.log(zb.lng);
         that.setData({
-          markers: markers,
-          lng: zb.lng,
-          lat: zb.lat,
+          marker: markers,
+          lat: myLocation.latitude,
+          lng: myLocation.longitude,
           myAddress: {
-            address: myLocation.address
+            address: e.wxMarkerData[0].address
           }
         });
         m.hideLoading(1500);
       })
      
     }else{
-      wx.showToast({
-        title: '定位失败',
-        icon: 'none',
-        mask: true,
-        duration: 2000,
-        success(){
-          setTimeout(()=>{
+     
+      wx.showModal({
+        title: '提示',
+        content: '定位失败，获取经纬度失败',
+        showCancel:false,
+        success(res){
+          if(res.confirm){
             wx.navigateBack({
               delta: 1
             });
-          },2500);
-         
+          }
         }
-      });
-     
-      m.hideLoading(1500);
-      
+      })
     }
 
   }

@@ -5,13 +5,27 @@ class Model extends Tm {
     super();
   }
 
-  // 获取所属单位
+  // 退出
   loginOut(userName,token, callback) {
     let parameter = {
       url: '/api/loginOut.json?token=' + token,
       data: {
         loginName: userName,
         token: token
+      },
+      type: 'POST',
+      sCallBack(res) {
+        callback && callback(res);
+      }
+    }
+    this.request('json', parameter);
+  }
+  // 获取用户信息
+  geUserInfo( token, callback) {
+    let parameter = {
+      url: '/api/userMess.json?token=' + token,
+      data: {
+        
       },
       type: 'POST',
       sCallBack(res) {

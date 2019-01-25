@@ -18,9 +18,20 @@ Page({
    */
   onLoad: function (options) {
     that=this;
-    let workInfo=wx.getStorageSync('workInfo');
+    let getWorkInfo=wx.getStorageSync('workInfo');
+    let userInfo = wx.getStorageSync('userInfo');
+    getWorkInfo.equipmentCname = options.equipmentCname;
+    if (getWorkInfo.pointType==2){
+      m.getCData(getWorkInfo.controllerId, userInfo.token, res => {
+        let getWI= wx.getStorageSync('workInfo');
+        getWI.lng = res.data.data.controller.lng;
+        getWI.lat = res.data.data.controller.lat;
+        wx.setStorageSync('workInfo', getWI)
+      });
+    }
+   
     that.setData({
-      wi: workInfo
+      wi: getWorkInfo
     });
   },
 
@@ -77,10 +88,10 @@ Page({
       url: '../history/index?cid=' + e.currentTarget.dataset.cid + '&fcode='+e.currentTarget.dataset.fcode,
     })
   },
-  linkSignMap(){
+  linkSignMap(e){
     let workInfo = wx.getStorageSync('workInfo');
     wx.navigateTo({
-      url: '../signMap/index?id=' + workInfo.id,
+      url: '../signMap/index?id=' + workInfo.id + '&onlymap=' + e.currentTarget.dataset.onlymap,
     })
   },
   signShowModal(){

@@ -16,12 +16,8 @@ Page({
         mapHeight: app.globalData.windowHeight - res[0].top
       });
     });
-
-  },
-  onShow:function(){
-    
-    m.location('realTime',(e)=>{
-      let markers=[
+    m.location('realTime', (e) => {
+      let markers = [
         {
           iconPath: "../img/position.png",
           id: 0,
@@ -33,19 +29,22 @@ Page({
       ]
       that.setData({
         markers: markers,
-        locationInfo:{
+        locationInfo: {
           latitude: e.wxMarkerData[0].latitude,
           longitude: e.wxMarkerData[0].longitude
-          
+
         }
       });
-      let locationInfo={
+      let locationInfo = {
         latitude: e.wxMarkerData[0].latitude,
         longitude: e.wxMarkerData[0].longitude,
         address: e.wxMarkerData[0].address
       }
       wx.setStorageSync('locationInfo', locationInfo);
     })
+  },
+  onShow:function(){
+
   },
 
   
@@ -79,8 +78,7 @@ Page({
     wx.scanCode({
       onlyFromCamera:true,
       scanType: 'qrCode',
-      success(e){
-        console.log(e);        
+      success(e){       
         let userInfo = wx.getStorageSync('userInfo');
         m.isEditor(e.result, userInfo.token, (res) => {     
           //code=1编辑控制器 code=2查询控制器信息
@@ -92,6 +90,19 @@ Page({
             wx.navigateTo({
               //url: '../addController/index?result=' + e.result,
               url: '../aSController/index?result=' + e.result,
+            })
+          } else if (res.data.code == 3) {
+            wx.showModal({
+              title: '提示',
+              content: '控制器未接入系统,请重试',
+              showCancel:false,
+              success(res){
+                if(res.confirm){
+                  wx.switchTab({
+                    url: '../index/index',
+                  })
+                }
+              }
             })
           }
         });

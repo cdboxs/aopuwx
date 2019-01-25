@@ -31,9 +31,21 @@ Page({
    */
   onShow: function () {
     that=this;
-    that.setData({
-      userInfo: wx.getStorageSync('userInfo')
+    let userInfo=wx.getStorageSync('userInfo')
+    m.geUserInfo(userInfo.token,res=>{
+      if(res.data.code==0){
+        that.setData({
+          userInfo: res.data.data
+        });
+      }else{
+        wx.showToast({
+          title: '获取数据失败',
+          mask:true,
+          icon:'none'
+        })
+      }
     });
+    
   },
 
   /**

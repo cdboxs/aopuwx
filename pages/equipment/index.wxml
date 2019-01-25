@@ -1,32 +1,35 @@
 <!--pages/equipment/index.wxml-->
-<view class='controllerName'>{{e.equipment.name}}{{e.equipment.workStatus}}
-  <text class="{{e.equipment.workStatus==1 ? 'green' : 'black'}}"></text>
+<view class='controllerName'>{{e.equipment.name}}
+  <text wx:if="{{e.equipmentMonit.status==0}}" style='background:blue;'></text>
+  <text wx:elif="{{e.equipmentMonit.status==1}}" style='background:red;'></text>
+  <text wx:elif="{{e.equipmentMonit.status==2}}" class="'background:#4876FF;"></text>
+  <text wx:else="{{e.equipmentMonit.status==3}}" class="'black"></text>
 </view>
 <view class='equipment'>
 
   <view>
     <text>IP地址：</text>
-    <text>{{e.controllerIp}}</text>
+    <text>{{e.equipment.ip==null?'暂无数据':e.equipment.ip}}</text>
   </view>
   <view>
     <text>网络状态：</text>
-    <text wx:if="{{e.equipmentMonit.networkStatus==null}}">网络异常</text>
-    <text wx:if="{{e.equipmentMonit.networkStatus==1}}">正常</text>
-    <text wx:if="{{e.equipmentMonit.networkStatus==0}}">断开</text>
+    <text wx:if="{{e.equipmentMonit.networkStatus==null}}">暂无数据</text>
+    <text wx:if="{{e.equipmentMonit.networkStatus==1}}">断开</text>
+    <text wx:if="{{e.equipmentMonit.networkStatus==0}}">正常</text>
   </view>
   <view>
     <text>工作状态：</text>
-    <text wx:if="{{e.equipment.workStatus==null}}">异常</text>
+    <text wx:if="{{e.equipment.workStatus==null}}">暂无数据</text>
     <text wx:if="{{e.equipment.workStatus==1}}">正常</text>
-    <text wx:if="{{e.equipment.workStatus==0}}">断开</text>
+    <text wx:if="{{e.equipment.workStatus==0}}">异常</text>
   </view>
   <view>
     <text>电流：</text>
-    <text>{{e.equipment.electricOwn}}</text>
+    <text>{{e.equipmentMonit.electricOwn}}</text>
   </view>
   <view>
     <text>丢包率：</text>
-    <text>{{e.equipmentMonit.packetLossRate==null?'暂无数据':e.equipmentMonit.packetLossRate}}%</text>
+    <text>{{e.equipmentMonit.packetLossRate==null?'暂无数据':e.equipmentMonit.packetLossRate+'%'}}</text>
   </view>
   <view>
     <text>品牌名称：</text>

@@ -84,23 +84,24 @@ Page({
   location() {
     m.showLoading('正在定位', 'none');
     let zb = wx.getStorageSync('controllerParam');
+    let my = wx.getStorageSync('locationInfo');
     m.location('realTime', (e) => {
       let markers = [
         {
           iconPath: "../img/position.png",
           id: 0,
-          latitude: zb.controller.lat,
-          longitude: zb.controller.lng,
+          longitude: zb.controllerMonit.lng,
+          latitude: zb.controllerMonit.lat,
           width: 36,
           height: 36
         }
       ]
       that.setData({
-        markers: markers,
+        marker: markers,
         locationInfo: {
-          latitude: zb.controller.lat,
-          longitude: zb.controller.lng,
-          address:zb.address
+          latitude: zb.controllerMonit.lat,
+          longitude: zb.controllerMonit.lng,
+          address:my.address
         }
       });
       m.hideLoading(1500);

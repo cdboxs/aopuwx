@@ -44,7 +44,7 @@
 .gauge {
   width: 50%;
   height: 100%;
-  margin:30rpx 0 30rpx 0;
+  margin:10rpx 0 20rpx 0;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -82,10 +82,9 @@ canvas {
   width:90%;
   display: flex;
   justify-content: space-around;
-  padding:20rpx 0;
   font-size: 30rpx;
   color:#777;
-  margin:0 auto 20rpx;
+  margin:0 auto 10rpx;
 }
 .ws text:first-child{
   color:#2cabe2;
@@ -176,7 +175,7 @@ canvas {
   align-items: center;
   border-radius: 10rpx;
   padding:0 30rpx;
-  margin:20rpx;
+  margin:15rpx;
   box-sizing: border-box;
   background: green;
 }

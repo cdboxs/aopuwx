@@ -128,8 +128,8 @@ Page({
     sName ? sName : "";
     let userInfo = wx.getStorageSync('userInfo');
     m.getListController(sName, userInfo.token, (res) => {
+      //console.log(res);
       if (res.data.code == 0 && res.data.data.length != 0) {
-        //console.log(res);
         that.setData({
           listController: res.data.data
         });
