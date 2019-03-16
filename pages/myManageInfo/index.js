@@ -9,18 +9,25 @@ Page({
   data: {
     maskflag:true,
     ybflag:false,
-    height: app.globalData.windowHeight
+    height: app.globalData.windowHeight,
+    hpHeight:'',
   },
   onLoad:function(e){
     that=this;
     that.setData({ 
-      c_id:e.mmid
+      c_id:e.mmid,
+      hpHeight: app.globalData.windowWidth
       });
-    
+  
+    var startTime = setInterval(function () {
+      that.getControllerData();
+    }, 3000);
+    that.setData({
+      realTime: startTime
+    });
   },
   onShow(){
     var that=this;
-    
     that.getControllerData();
     that.setData({
       allSwitch: { onInit: that.allSwitch },//总闸
@@ -28,11 +35,17 @@ Page({
       humidity: { onInit: that.humidity},//湿度
       PowerSupply:{ onInit: that.PowerSupply}//电源
     });
-    
+
     
   },
   onReady() {
 
+  },
+  onResize:function(e){
+    console.log(e);
+  },
+  onUnload(){
+    clearInterval(that.data.realTime);
   },
   linkManageInfo(){
     wx.navigateTo({
@@ -61,7 +74,7 @@ Page({
     option.series[0].detail.formatter= "{value}V",
     option.series[0].max = 400
     option.series[0].min = 60
-    option.series[0].splitNumber =10
+    option.series[0].splitNumber =4
     //间隔最小范围min/280 间隔最大范围 max/280
     //option.series[0].axisLine.lineStyle.color = [[0.2, '#ff4500'], [0.8, 'green'], [1, '#ff4500']],
     option.series[0].axisLine.lineStyle.color = [[0.2, 'green'], [0.8, 'green'], [1, 'green']],
@@ -84,7 +97,7 @@ Page({
     option.series[0].detail.formatter = "{value}V",
     option.series[0].min = 0
     option.series[0].max = 80
-    option.series[0].splitNumber =10 
+    option.series[0].splitNumber =8 
     //option.series[0].axisLine.lineStyle.color = [[0.2, '#ff4500'], [0.8, 'green'], [1, '#ff4500']],
     option.series[0].axisLine.lineStyle.color = [[0.2, 'green'], [0.8, 'green'], [1, 'green']],
     canvas.setChart(chart);
@@ -125,7 +138,7 @@ Page({
     option.series[0].detail.formatter = "{value}V",
     option.series[0].min = 0
     option.series[0].max = 40
-    option.series[0].splitNumber = 10
+    option.series[0].splitNumber = 8
     //option.series[0].axisLine.lineStyle.color = [[0.2, '#ff4500'], [0.8, 'green'], [1, '#ff4500']],
     option.series[0].axisLine.lineStyle.color = [[0.2, 'green'], [0.8, 'green'], [1, 'green']],
     canvas.setChart(chart);
@@ -137,21 +150,32 @@ Page({
   * **/
   getControllerData() {
     let userInfo = wx.getStorageSync('userInfo');
+    let eData=[];
     m.getControllerData(that.data.c_id, userInfo.token, (res) => {
       //console.log(res);
       if(res.data.code==0 && res.data.data !=null){
         wx.setStorageSync('controllerParam', res.data.data);
+        res.data.data.equipmentList.map(function(item){
+          m.getEquipmentData(item.id, userInfo.token, (e) => {
+            if (e.data.code == 0 && e.data.data != null) {
+              eData.push(e.data.data);
+            }
+          });
+        });
+        //console.log(eData);
         setTimeout(()=>{
           that.setData({
             c: res.data.data,
+            eData: eData,
             maskflag: false,
             ybflag: true
           });
-        },1000);
-        
+        },500);
       }
     });
+   
   },
+
   /**
    * 重启控制器
    * */ 
@@ -159,8 +183,8 @@ Page({
     m.showLoading('正在重启','none');
     let userInfo = wx.getStorageSync('userInfo');
     m.resetController(that.data.c_id, userInfo.token, (res) => {
-      //console.log(res);
-     if(res.data.code==0){
+      console.log(res);
+     if(res.data.code==200){
        setTimeout(()=>{
          wx.hideLoading();
          wx.showToast({
@@ -215,7 +239,8 @@ Page({
   },
   //风扇开关
   fanSwitch(e) {
-    //console.log(e.currentTarget.dataset.windflag);
+    console.log(e.currentTarget.dataset.windflag);
+    console.log(that.data.c_id);
     wx.showModal({
       title: '风扇授权',
       content: '是否授权风扇开关？',
@@ -298,12 +323,12 @@ Page({
   }
 });
 let option = {
-  backgroundColor: "#ffffff",
+  backgroundColor: "#10143d",
   series: [{
     name: '业务指标',
     type: 'gauge',
-    center: ["50%", "50%"], // 仪表位置
-    radius: "100%", //仪表大小
+    center: ["50%", "49%"], // 仪表位置
+    radius: "90%", //仪表大小
     min: 0,
     max: 120,
     splitNumber: 6,
@@ -311,12 +336,11 @@ let option = {
       formatter: '{value}%'
     },
     splitLine: { // 分隔线
-      length: 10, // 属性length控制线长
+      length: 8, // 属性length控制线长
       lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-        width: 2,
+        width: 1,
         color: 'green',
-        shadowColor: '#2cabe3', //默认透明
-        shadowBlur: 0
+       
       }
     },
     detail: {
@@ -330,6 +354,7 @@ let option = {
       lineStyle: {
         width: 4,
         shadowBlur: 0,
+        color: 'green',
         color: [[0.2, '#228b22'], [0.2, 0.4, 'blue'], [1, '#ff4500']], 
       },
     },

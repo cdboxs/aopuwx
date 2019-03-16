@@ -32,5 +32,18 @@ class Model extends Tm{
     };
     this.request('encode', parameter);
   }
+  solution(oid,token,callBack){
+    let parameter = {
+      url: '/order/repository?token=' + token,
+      type: 'POST',
+      data: {
+        orderInfoId: oid
+      },
+      sCallBack(res) {
+        callBack && callBack(res);
+      }
+    };
+    this.request('encode', parameter);
+  }
 }
 export{Model}

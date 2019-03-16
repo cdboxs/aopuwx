@@ -38,6 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    m.showLoading('正在定位', 'none');
     that.location();
     that.getNowTime();
     setInterval(()=>{
@@ -63,7 +64,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    m.cleatDW();
   },
 
   /**
@@ -133,36 +134,42 @@ Page({
   location(){
 
     let zb = wx.getStorageSync('workInfo');
-    let myLocation = wx.getStorageSync('locationInfo');
-    if (zb.lat != null || zb.lng != null) {
-      m.location('realTime', (e) => {
-        let markers = [
-          {
-            iconPath: "../img/position.png",
-            id: 0,
-            latitude: zb.lat,
-            longitude: zb.lng,
-            width: 36,
-            height: 36
-          },
-          {
-            iconPath: "../img/mylcation.png",
-            id: 0,
-            latitude: myLocation.latitude,
-            longitude: myLocation.longitude,
-            width: 36,
-            height: 36
-          }
-        ]
-        that.setData({
-          marker: markers,
-          lat: myLocation.latitude,
-          lng: myLocation.longitude,
-          myAddress: {
-            address: e.wxMarkerData[0].address
-          }
-        });
-        m.hideLoading(1500);
+    if (zb.lat != null && zb.lng != null) {
+      m.location(500, (e) => {
+        if (e.wxMarkerData.length==1){
+          let markers = [
+            {
+              iconPath: "../img/position.png",
+              id: 0,
+              latitude: zb.lat,
+              longitude: zb.lng,
+              width: 36,
+              height: 36
+            },
+            {
+              iconPath: "../img/mylcation.png",
+              id: 0,
+              latitude: e.wxMarkerData[0].latitude,
+              longitude: e.wxMarkerData[0].longitude,
+              width: 36,
+              height: 36
+            }
+          ]
+          that.setData({
+            marker: markers,
+            lat: e.wxMarkerData[0].latitude,
+            lng: e.wxMarkerData[0].longitude,
+            myAddress: {
+              address: e.wxMarkerData[0].address
+            }
+          });
+          m.cleatDW();
+          m.hideLoading(2000);
+        }else{
+          that.location();
+        }
+   
+      
       })
      
     }else{

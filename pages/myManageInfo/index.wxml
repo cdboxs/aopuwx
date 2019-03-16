@@ -1,109 +1,137 @@
 <!--pages/controller/index.wxml-->
-<view class='mask' wx:if="{{maskflag}}" style='height:{{height}}px;'><image src='../img/logo.png'></image></view>
-<view wx:if="{{ybflag}}">
-<block wx:if="{{c.equipmentList.length !=0}}">
-<view class='switchTab' >
-  <text  wx:for="{{c.equipmentList}}" wx:key="key" data-equipmentid='{{item.id}}' bindtap='equipment'>通道{{index+1}}</text>
+<view class='mask' wx:if="{{maskflag}}" style='height:{{hpHeight}}px;'>
+  <image src='../img/logo.png'></image>
 </view>
-</block>
-<view class='controller'>
-  <view class='gauge'>
-    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{allSwitch}}"></ec-canvas>
-    <view>市电</view>
-  </view>
-  <view class='gauge'>
-    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{temperature}}"></ec-canvas>
-    <view>24V电源适配器</view>
-  </view>
-  <view class='gauge'>
-    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{humidity}}"></ec-canvas>
-    <view>12V总电流</view>
-  </view>
-  <view class='gauge'>
-    <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{PowerSupply}}"></ec-canvas>
-    <view>12V电源适配器</view>
-  </view>
-</view>
-<view class='ws'>
-  <view><text>温度：</text><text>{{wd}}℃</text></view>
-  <view><text>湿度：</text><text>{{sd}}%RH</text></view>
-</view>
-<view class='controllerBtn'>
-  <block wx:if="{{c.controller.windFlag==0}}">
-    <view data-windflag="1" bindtap='fanSwitch' style='background:#cac41f;'>
-      <image src='../img/f.png'></image>
-      <text>风扇关闭</text>
+
+
+
+<view wx:if="{{ybflag}}" class='manageh' style='height:{{hpHeight}}px;'>
+  <!-- <block wx:if="{{c.equipmentList.length !=0}}">
+    <view class='switchTab'>
+      <text wx:for="{{c.equipmentList}}" wx:key="key" data-equipmentid='{{item.id}}' bindtap='equipment'>通道{{index+1}}</text>
     </view>
-  </block>
-  <block wx:if="{{c.controller.windFlag==1}}">
-    <view data-windflag="0" bindtap='fanSwitch' style='background:#39c30d;'>
-      <image src='../img/f_a.png'></image>
-      <text>风扇开启</text>
+  </block> -->
+  <view class='controller'>
+    <view class='gauge' style='height:{{hpHeight/3}}px;'>
+      <ec-canvas style='height:{{hpHeight/3.5}}px;' id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{allSwitch}}"></ec-canvas>
+      <view>市电{{hpHeight}}</view>
     </view>
-  </block>
-  <block wx:if="{{c.controller.powerFlag==0}}">
-  <view data-powerflag="1" bindtap='mainSwitch' style='background:#cac41f;'>
-    <image src='../img/z.png'></image>
-    <text>总闸关闭</text>
-  </view>
-  </block>
-    <block wx:if="{{c.controller.powerFlag==1}}">
-  <view data-powerflag="0" bindtap='mainSwitch' style='background:#39c30d;'>
-    <image src='../img/z_a.png'></image>
-    <text>总闸开启</text>
-  </view>
-  </block>
-  
-  <view bindtap='openDoor' style='background:#39c30d;'>
-    <text class='iconfont icon-lishi'></text>
-    <text>开门</text>
-  </view>
-  <view bindtap='resetController'>
-    <text class='iconfont icon-zhongqi'></text>
-    <text>控制器重启</text>
-  </view>
-</view>
-<view class='showtip'>
-    <view>
-      <image src="../img/{{c.controllerMonit.upOpticalCableStatus==1 ? 'g_a.png': 'g.png'}}"></image>
-      <text>上行光缆</text>
+    <view class='gauge' style='height:{{hpHeight/3}}px;'>
+      <ec-canvas style='height:{{hpHeight/3.5}}px;' id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{temperature}}"></ec-canvas>
+      <view>24V电源适配器</view>
     </view>
-    <!-- <view>
+    <view class='gauge' style='height:{{hpHeight/3}}px;'>
+      <ec-canvas style='height:{{hpHeight/3.5}}px;' id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{humidity}}"></ec-canvas>
+      <view>12V总电流</view>
+    </view>
+    <view class='gauge' style='height:{{hpHeight/3}}px;'>
+      <ec-canvas style='height:{{hpHeight/3.5}}px;' id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{PowerSupply}}"></ec-canvas>
+      <view>12V电源适配器</view>
+    </view>
+  </view>
+  <swiper bindchange="vertical" vertical="true" indicator-dots="true" indicator-color="#ffffff" indicator-active-color="green" style='width:100%;height:{{hpHeight/1.5}}px;'>
+    <swiper-item style='height:{{hpHeight/2}}px;'>
+      <view class='controllerR' style='height:{{hpHeight/2}}px;'>
+        <view class='crl'>
+          <view class='ws'>
+            <view>
+              <text>温度：</text>
+              <text>{{wd}}℃</text>
+            </view>
+            <view>
+              <text>湿度：</text>
+              <text>{{sd}}%RH</text>
+            </view>
+          </view>
+          <view class='controllerBtn'>
+            <block wx:if="{{c.controller.windFlag==0}}">
+              <view data-windflag="1" bindtap='fanSwitch' style='background:#cac41f;'>
+                <image src='../img/f.png'></image>
+                <text>风扇关闭</text>
+              </view>
+            </block>
+            <block wx:elif="{{c.controller.windFlag==1}}">
+              <view data-windflag="0" bindtap='fanSwitch' style='background:#39c30d;'>
+                <image src='../img/f_a.png'></image>
+                <text>风扇开启</text>
+              </view>
+            </block>
+            <block wx:if="{{c.controller.powerFlag==0}}">
+              <view data-powerflag="1" bindtap='mainSwitch' style='background:#cac41f;'>
+                <image src='../img/z.png'></image>
+                <text>总闸关闭</text>
+              </view>
+            </block>
+            <block wx:elif="{{c.controller.powerFlag==1}}">
+              <view data-powerflag="0" bindtap='mainSwitch' style='background:#39c30d;'>
+                <image src='../img/z_a.png'></image>
+                <text>总闸开启</text>
+              </view>
+            </block>
+            <block wx:if="{{c.controllerMonit.cabinetDoor==1}}">
+              <view style='background:#cac41f;'>
+                <text class='iconfont icon-lishi'></text>
+                <text>开门</text>
+              </view>
+            </block>
+            <block wx:elif="{{c.controllerMonit.cabinetDoor==0}}">
+              <view bindtap='openDoor' style='background:#39c30d;'>
+                <text class='iconfont icon-lishi'></text>
+                <text>开门</text>
+              </view>
+            </block>
+            <block wx:else>
+              <view style='background:#cac41f;'>
+                <text class='iconfont icon-lishi'></text>
+                <text>开门</text>
+              </view>
+            </block>
+            <view bindtap='resetController'>
+              <text class='iconfont icon-zhongqi'></text>
+              <text>控制器重启</text>
+            </view>
+          </view>
+          <view class='showtip'>
+            <view>
+              <image src="../img/{{c.controllerMonit.upOpticalCableStatus==1 ? 'g_a.png': 'g.png'}}"></image>
+              <text>上行光缆</text>
+            </view>
+            <!-- <view>
       <icon class='iconfont icon-80dianliang' style="color:{{c.controllerMonit.powerStatus==1 ? 'green': '#cdcdcd'}};"></icon>
       <text>24V电源</text>
     </view> -->
-    <view>
-      <icon class='iconfont icon-shuixi' style="color:{{c.controllerMonit.isRetting==1 ? 'green': '#cdcdcd'}};"></icon>
-      <text>水浸</text>
-    </view>
-    <view>
-      <icon class='iconfont icon-fuwuqi' style="color:{{c.controllerMonit.serialServerRs232Status==1 ? 'green': '#cdcdcd'}};"></icon>
-      <text>串口服务器</text>
-    </view>
-    <view>
-      <image src="../img/{{c.controllerMonit.linkStatus==1 ? '4g_a.png': '4g.png'}}"></image>
-      <text>4G无线链接</text>
-    </view>  
-</view>
-
-<view class='controllerInformation'>
-  <view class='controllerName'>
-    {{c.controller.name}}
-    <image src='../img/pc_a.png' bindtap='linkCMap'></image>
-  </view>
-  <view>
-    <text>IP地址：</text>
-    <text>{{c.controller.ip}}</text>
-  </view>
-  <view>
-    <text>设备编码：</text>
-    <text>{{c.controller.code==""?"暂无数据":c.controller.code}}</text>
-  </view>
-  <view>
-    <text>MAC地址：</text>
-    <text>{{c.controller.mac}}</text>
-  </view>
-  <!-- <view>
+            <view>
+              <icon class='iconfont icon-shuixi' style="color:{{c.controllerMonit.isRetting==1 ? 'green': '#cdcdcd'}};"></icon>
+              <text>水浸</text>
+            </view>
+            <view>
+              <icon class='iconfont icon-fuwuqi' style="color:{{c.controllerMonit.serialServerRs232Status==1 ? 'green': '#cdcdcd'}};"></icon>
+              <text>串口服务器</text>
+            </view>
+            <view>
+              <image src="../img/{{c.controllerMonit.linkStatus==1 ? '4g_a.png': '4g.png'}}"></image>
+              <text>4G无线链接</text>
+            </view>
+          </view>
+        </view>
+        <view class='controllerInformation'>
+          <view class='controllerName'>
+            {{c.controller.name}}
+            <image src='../img/pc_a.png' bindtap='linkCMap'></image>
+          </view>
+          <view>
+            <text>IP地址：</text>
+            <text>{{c.controller.ip}}</text>
+          </view>
+          <view>
+            <text>设备编码：</text>
+            <text>{{c.controller.code==""?"暂无数据":c.controller.code}}</text>
+          </view>
+          <view>
+            <text>MAC地址：</text>
+            <text>{{c.controller.mac}}</text>
+          </view>
+          <!-- <view>
     <text>品牌名称：</text>
     <block wx:for="{{c.equipmentList}}" wx:key="key">
     <text wx:if="{{item.controllerId==c.controller.bindUserId && item.brand !=null}}">{{item.brand}}</text>
@@ -113,18 +141,77 @@
     <text>设备型号：</text>
     <text>{{c.controller.model}}</text>
   </view> -->
-  <view>
-    <text>所属单位：</text>
-    <text>{{c.resDepartName}}</text>
-  </view>
-  <view>
-    <text>维护单位：</text>
-    <text>{{c.maintDepartName}}</text>
-  </view>
-  <view>
-    <text>维护人员：</text>
-    <text>{{c.maintUserName}}</text>
-  </view>            
-</view>
+          <view>
+            <text>所属单位：</text>
+            <text>{{c.resDepartName}}</text>
+          </view>
+          <view>
+            <text>维护单位：</text>
+            <text>{{c.maintDepartName}}</text>
+          </view>
+          <view>
+            <text>维护人员：</text>
+            <text>{{c.maintUserName}}</text>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class='equipmentList'>
 
+        <view class='equipment' wx:for="{{eData}}" wx:key="key" wx:for-item="e">
+          <view class='controllerNameE'>{{e.equipment.name}}
+            <text wx:if="{{e.equipmentMonit.status==0}}" style='background:blue;'></text>
+            <text wx:elif="{{e.equipmentMonit.status==1}}" style='background:red;'></text>
+            <text wx:elif="{{e.equipmentMonit.status==2}}" class="'background:#4876FF;"></text>
+            <text wx:else="{{e.equipmentMonit.status==3}}" class="'black"></text>
+          </view>
+          <view class='eData'>
+            <text>IP地址：</text>
+            <text>{{e.equipment.ip==null?'暂无数据':e.equipment.ip}}</text>
+          </view>
+          <view class='eData'>
+            <text>网络状态：</text>
+            <text wx:if="{{e.equipmentMonit.networkStatus==null}}">暂无数据</text>
+            <text wx:if="{{e.equipmentMonit.networkStatus==1}}">断开</text>
+            <text wx:if="{{e.equipmentMonit.networkStatus==0}}">正常</text>
+          </view>
+          <view class='eData'>
+            <text>工作状态：</text>
+            <text wx:if="{{e.equipment.workStatus==null}}">暂无数据</text>
+            <text wx:if="{{e.equipment.workStatus==1}}">正常</text>
+            <text wx:if="{{e.equipment.workStatus==0}}">异常</text>
+          </view>
+          <view class='eData'>
+            <text>电流：</text>
+            <text>{{e.equipmentMonit.electricOwn}}</text>
+          </view>
+          <view class='eData'>
+            <text>丢包率：</text>
+            <text>{{e.equipmentMonit.packetLossRate==null?'暂无数据':e.equipmentMonit.packetLossRate+'%'}}</text>
+          </view>
+          <view class='eData'>
+            <text>品牌名称：</text>
+            <text>{{e.equipment.brand==null?'暂无数据':e.equipment.brand}}</text>
+          </view>
+          <view class='eData'>
+            <text>设备型号：</text>
+            <text>{{e.equipment.model==null?'暂无数据':e.equipment.model}}</text>
+          </view>
+          <view class='eData'>
+            <text>所属单位：</text>
+            <text>{{e.resDepartName==null?'暂无数据':e.resDepartName}}</text>
+          </view>
+          <view class='eData'>
+            <text>维护单位：</text>
+            <text>{{e.maintDepartName==null?'暂无数据':e.maintDepartName}}</text>
+          </view>
+          <view class='eData'>
+            <text>维护人员：</text>
+            <text>{{e.maintUserName==null?'暂无数据':e.maintUserName}}</text>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
 </view>

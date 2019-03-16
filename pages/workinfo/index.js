@@ -19,17 +19,6 @@ Page({
   onLoad: function (options) {
     that=this;
     let getWorkInfo=wx.getStorageSync('workInfo');
-    let userInfo = wx.getStorageSync('userInfo');
-    getWorkInfo.equipmentCname = options.equipmentCname;
-    if (getWorkInfo.pointType==2){
-      m.getCData(getWorkInfo.controllerId, userInfo.token, res => {
-        let getWI= wx.getStorageSync('workInfo');
-        getWI.lng = res.data.data.controller.lng;
-        getWI.lat = res.data.data.controller.lat;
-        wx.setStorageSync('workInfo', getWI)
-      });
-    }
-   
     that.setData({
       wi: getWorkInfo
     });
@@ -147,5 +136,25 @@ Page({
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phonenum,
     })
+  },
+  solution(e){
+    let userInfo = wx.getStorageSync('userInfo');
+    m.solution(e.currentTarget.dataset.gid, userInfo.token,(res)=>{
+      if(res.data){
+        wx.showModal({
+          title: '提示',
+          content: res.data.toString(),
+          showCancel: false
+        })
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '暂无方案',
+          showCancel: false
+        })
+      }
+    
+    });
+   
   }
 })

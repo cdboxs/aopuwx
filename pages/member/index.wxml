@@ -1,4 +1,5 @@
 <!--pages/member/index.wxml-->
+<view wx:if="{{userInfo}}">
 <view class='mTop'>
   <view>
     <image src='../img/logo.png'></image>
@@ -25,4 +26,5 @@
     </view>
     <icon class='icon iconfont icon-jiantou12'></icon>
   </view>
+</view>
 </view>

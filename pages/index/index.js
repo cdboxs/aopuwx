@@ -16,37 +16,43 @@ Page({
         mapHeight: app.globalData.windowHeight - res[0].top
       });
     });
-    m.location('realTime', (e) => {
-      let markers = [
-        {
-          iconPath: "../img/position.png",
-          id: 0,
-          latitude: e.wxMarkerData[0].latitude,
-          longitude: e.wxMarkerData[0].longitude,
-          width: 36,
-          height: 36
-        }
-      ]
-      that.setData({
-        markers: markers,
-        locationInfo: {
-          latitude: e.wxMarkerData[0].latitude,
-          longitude: e.wxMarkerData[0].longitude
 
-        }
-      });
-      let locationInfo = {
-        latitude: e.wxMarkerData[0].latitude,
-        longitude: e.wxMarkerData[0].longitude,
-        address: e.wxMarkerData[0].address
-      }
-      wx.setStorageSync('locationInfo', locationInfo);
-    })
   },
   onShow:function(){
+   
+    m.location(3000, (e) => {
+      //console.log(e);
+      if (e.wxMarkerData.length == 1) {
+        let markers = [
+          {
+            iconPath: "../img/position.png",
+            id: 0,
+            latitude: e.wxMarkerData[0].latitude,
+            longitude: e.wxMarkerData[0].longitude,
+            width: 36,
+            height: 36
+          }
+        ]
+        that.setData({
+          markers: markers,
+          locationInfo: {
+            latitude: e.wxMarkerData[0].latitude,
+            longitude: e.wxMarkerData[0].longitude
 
+          }
+        });
+        let locationInfo = {
+          latitude: e.wxMarkerData[0].latitude,
+          longitude: e.wxMarkerData[0].longitude,
+          address: e.wxMarkerData[0].address
+        }
+        m.cleatDW();
+      }
+    })
   },
-
+  onUnload(){
+    // m.cleatDW();
+  },
   
   /*----------------------------事件处理函数---------------------------------------*/
   linkWorkList(res){

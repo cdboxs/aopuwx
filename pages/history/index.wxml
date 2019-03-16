@@ -1,9 +1,10 @@
 <!--历史故障-->
-
-<view class='hlist' wx:for="{{history}}" wx:key="key">
-  <view>故障时间：{{item.faultTime}}</view>
+<block  wx:for="{{history}}" wx:key="key">
+<view class='hlist' wx:if="{{item.status==5}}">
+  <view>故障时间：{{item.createDate}}</view>
   <view>
     <text>维修方式：</text>
     <text>{{item.maintContent}}</text>
   </view>
 </view>
+</block>

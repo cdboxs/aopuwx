@@ -34,8 +34,7 @@
   </view>
   <view>
     <text>点位：</text>
-    <text wx:if="{{wi.pointType==1}}">{{wi.controllerName}}</text>
-    <text wx:elif="{{wi.pointType==2}}">{{wi.equipmentCname}}</text>
+    <text>{{wi.controllerName}}</text>
   </view>
   <view>
     <text>位置：</text>
@@ -82,9 +81,9 @@
     <text wx:else>{{wi.evaluateContent}}</text>
   </view>
 </view>
-<view class='workbtn' wx:if="{{wi.status==1 || wi.status==2}}">
-  <view>修复方案</view>
-  <view bindtap='historyGz' data-cid='{{wi.controllerId}}' data-fcode='{{wi.faultCode}}'>历史故障</view>
+<view class='workbtn' >
+  <view  data-gid="{{wi.id}}" bindtap='solution'>修复方案</view>
+  <view  bindtap='historyGz' data-cid='{{wi.controllerId}}' data-fcode='{{wi.faultCode}}'>历史故障</view>
 </view>
 <view class='sign' wx:if="{{wi.status==1}}" bindtap='linkSignMap'>签到维修</view>
 <view class='sign' wx:elif="{{wi.status==2}}" bindtap='signShowModal'>维修完成</view>

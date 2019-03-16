@@ -34,7 +34,14 @@
 }
 
 
+.hlist .noData{
+  display: block;
+  width: 100%;
+  color:red;
+  font-size: 30rpx;
+  text-align: center;
 
+}
 
 
 

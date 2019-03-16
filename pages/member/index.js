@@ -16,7 +16,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    that = this;
+    let userInfo = wx.getStorageSync('userInfo');
+    wx.showLoading({
+      title: '正在加载',
+      mask: true
+    })
+    m.geUserInfo(userInfo.token, res => {
+      if (res.data.code == 0) {
+        setTimeout(() => {
+          that.setData({
+            userInfo: res.data.data
+          });
+          wx.hideLoading();
+        }, 1000);
 
+      } else {
+        wx.showToast({
+          title: '获取数据失败',
+          mask: true,
+          icon: 'none'
+        })
+      }
+    });
   },
 
   /**
@@ -30,21 +52,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    that=this;
-    let userInfo=wx.getStorageSync('userInfo')
-    m.geUserInfo(userInfo.token,res=>{
-      if(res.data.code==0){
-        that.setData({
-          userInfo: res.data.data
-        });
-      }else{
-        wx.showToast({
-          title: '获取数据失败',
-          mask:true,
-          icon:'none'
-        })
-      }
-    });
+    
     
   },
 

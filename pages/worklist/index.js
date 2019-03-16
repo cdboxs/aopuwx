@@ -25,7 +25,7 @@ Page({
       let userInfo = wx.getStorageSync('userInfo');
       //工单状态（""：所有、0：待派单、1：待维修、2：维修中、3：待评价、4：已撤单、5：已完成、6：未完成）
       m.getWorkAllData("", userInfo.token, (res) => {
-        console.log(res);
+        //console.log(res.data.data);
         if (res.data.code == 0) {
           let result = res.data.data;
 
@@ -44,7 +44,7 @@ Page({
           });
 
           m.hideLoading(500);
-        } else {
+        }else {
           wx.showToast({
             title: '暂无数据',
             mask: true,
@@ -149,7 +149,7 @@ Page({
   linkWorkinfo(e){
     wx.setStorageSync('workInfo',e.currentTarget.dataset.workinfo);
     wx.navigateTo({
-      url: '../workinfo/index?id=' + e.currentTarget.dataset.id + '&equipmentCname=' + e.currentTarget.dataset.equipmentcname
+      url: '../workinfo/index?id=' + e.currentTarget.dataset.id
     })
   },
   workNav(e){

@@ -84,8 +84,7 @@ Page({
   location() {
     m.showLoading('正在定位', 'none');
     let zb = wx.getStorageSync('controllerParam');
-    let my = wx.getStorageSync('locationInfo');
-    m.location('realTime', (e) => {
+    if (zb.controllerMonit.lng != null && zb.controllerMonit.lat!=null){
       let markers = [
         {
           iconPath: "../img/position.png",
@@ -101,10 +100,24 @@ Page({
         locationInfo: {
           latitude: zb.controllerMonit.lat,
           longitude: zb.controllerMonit.lng,
-          address:my.address
         }
       });
-      m.hideLoading(1500);
-    });
+      m.hideLoading(2000);
+    }else{
+      m.hideLoading(100);
+      wx.showModal({
+        title: '提示',
+        content: '控制器经纬度错误',
+        showCancel:false,
+        success(e){
+          if(e.confirm){
+            wx.navigateBack({
+              data:1
+            })
+          }
+        }
+      })
+    }
+
   }
 })

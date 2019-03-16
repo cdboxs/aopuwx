@@ -4,6 +4,7 @@ class Tm{
     //this.httpurl ='http://120.77.80.232:8090';
     this.httpurl = 'https://www.opt-ims.com/znywapi';
     this.mapAK ='hpbEveY2MpkN1UT6w4i2DgCfyrNvfsAc';
+    this.clear = '';
   }
   
   /**
@@ -29,7 +30,7 @@ class Tm{
        responseType: 'text',
        success: function(res) {
         // 判断token是否过期
-         if (res.data.code == -1) {
+         if (res.data.code == -1 || res.data.code == -3) {
            wx.removeStorageSync('userInfo');
            wx.showModal({
              title: '提示',
@@ -78,24 +79,28 @@ class Tm{
     };
     let fail = function (res) {
      
-
+      //console.log(res);
       
     };
     if(typeof times=='number'){
-      setInterval(()=>{        
+      var startTime=setInterval(()=>{        
         BMap.regeocoding({
           fail: fail,
           success: success,
         }); 
-      },times)
+      },times);
+      this.clear = startTime;
     } else if (times =='realTime'){
       BMap.regeocoding({
         fail: fail,
         success: success,
       });
     }
+   
   }
-
+  cleatDW(){
+    clearInterval(this.clear);
+  }
   /**
    *showloading 提示封装 
    *

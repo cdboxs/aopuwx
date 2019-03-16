@@ -1,8 +1,7 @@
 <!--index.wxml-->
 <swiper id='banner' indicator-dots indicator-color="#2aabe2" indicator-active-color="#fff">
-  <swiper-item><image src='../img/banner.jpg'></image></swiper-item>
-  <swiper-item><image src='../img/banner.jpg'></image></swiper-item>
-  <swiper-item><image src='../img/banner.jpg'></image></swiper-item>
+  <swiper-item><image src='../img/banner.jpg' mode="widthFix"></image></swiper-item>
+  <swiper-item><image src='../img/z.jpg' mode="widthFix"></image></swiper-item>
 </swiper>
 <view class='indexMenu'>
   <view class='icons' bindtap='linkWorkList' data-workNavId='1'>

@@ -1,4 +1,5 @@
 <!--pages/worklist/index.wxml-->
+
 <scroll-view class='workNav' scroll-x scroll-with-animation="true" scroll-left="{{scrollLeft}}px">
   <view class="{{workNavId==7?'active':''}}" data-workNavId="7" bindtap='workNav'>全部</view>
   <!-- <view class="{{workNavId==0?'active':''}}" data-workNavId="0" bindtap='workNav'>待派单</view> -->
@@ -138,6 +139,7 @@
     </view>
 </scroll-view>
 </view>
+
 
 
 
